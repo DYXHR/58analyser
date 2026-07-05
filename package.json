@@ -1,0 +1,20 @@
+{
+  "name": "icc-pdf-downloader",
+  "version": "1.0.0",
+  "description": "建筑材料价格报告下载与人工成本数据爬取工具",
+  "type": "module",
+  "scripts": {
+    "download": "node download-pdf.js",
+    "convert": "node pdf-to-html.js",
+    "scrape": "node scrape-yupao.js",
+    "batch": "node scrape-yupao.js --batch",
+    "scrape58": "node scrape-58.js",
+    "batch58": "node scrape-58.js --batch",
+    "serve": "python -m http.server 8080 --directory html-output"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.2",
+    "pdfjs-dist": "^6.1.200",
+    "playwright": "^1.49.0"
+  }
+}

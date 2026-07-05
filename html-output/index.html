@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建筑材料价格报告库</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg: #f5f7fa; --card: #fff; --primary: #1890ff; --text: #333; --text-light: #999; --border: #e8e8e8; }
+    body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif; color: var(--text); }
+
+    .top-bar {
+      background: linear-gradient(135deg, #1890ff, #096dd9);
+      color: #fff; padding: 32px 24px; text-align: center;
+    }
+    .top-bar h1 { font-size: 24px; font-weight: 600; }
+    .top-bar .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+    .top-bar .stats { margin-top: 16px; font-size: 13px; opacity: 0.9; }
+
+    .container { max-width: 1000px; margin: -20px auto 40px; padding: 0 16px; }
+
+    .category-group { margin-bottom: 32px; }
+    .category-title {
+      font-size: 16px; font-weight: 600; color: var(--text);
+      padding: 12px 16px; background: var(--card); border-radius: 8px;
+      border-left: 4px solid var(--primary); margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .category-title .count { font-weight: 400; color: var(--text-light); font-size: 14px; }
+
+    .report-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+    }
+    .report-card {
+      display: block; background: var(--card); border-radius: 8px; padding: 14px 16px;
+      text-decoration: none; color: var(--text);
+      border: 1px solid var(--border); transition: all 0.15s;
+    }
+    .report-card:hover { border-color: var(--primary); box-shadow: 0 2px 12px rgba(24,144,255,0.15); transform: translateY(-1px); }
+    .report-name { font-size: 14px; line-height: 1.5; font-weight: 500; }
+    .report-meta { font-size: 12px; color: var(--text-light); margin-top: 6px; }
+    .report-meta .pages { background: #f0f5ff; color: var(--primary); padding: 1px 8px; border-radius: 10px; }
+
+    .search-box {
+      max-width: 400px; margin: 16px auto; display: flex;
+    }
+    .search-box input {
+      flex: 1; padding: 8px 14px; border: 1px solid #ddd; border-radius: 20px;
+      font-size: 14px; outline: none;
+    }
+    .search-box input:focus { border-color: var(--primary); }
+
+    @media (max-width: 600px) {
+      .report-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <h1>建筑材料价格报告库</h1>
+    <div class="subtitle">ICC China · 瑞达恒研究院价格趋势报告</div>
+    <div class="stats">共 10 份报告 · 1 个分类</div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索报告名称..." oninput="filterReports()" />
+    </div>
+  </div>
+  <div class="container" id="container">
+    <div class="category-group">
+        <h2 class="category-title">水泥 <span class="count">(10)</span></h2>
+        <div class="report-grid"><a href="水泥/2025年1-12月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2025年1-12月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2025年10月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2025年10月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2025年11月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2025年11月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2025年9月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2025年9月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年1月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年1月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年2月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年2月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年3月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年3月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年4月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年4月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年5月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年5月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a><a href="水泥/2026年6月全国水泥价格走势分析报告/index.html" class="report-card">
+            <div class="report-name">2026年6月全国水泥价格走势分析报告</div>
+            <div class="report-meta"><span class="pages">6页</span></div>
+          </a></div>
+      </div>
+  </div>
+  <script>
+    function filterReports() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.report-card').forEach(card => {
+        const name = card.querySelector('.report-name').textContent.toLowerCase();
+        card.style.display = (!q || name.includes(q)) ? '' : 'none';
+      });
+      document.querySelectorAll('.category-group').forEach(g => {
+        const visible = g.querySelectorAll('.report-card:not([style*="none"])').length;
+        g.style.display = visible > 0 ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

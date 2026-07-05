@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鱼泡网时薪报告 - 产线工人 - 2026-07-04</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    color: #fff;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .header h1 { font-size: 24px; margin-bottom: 8px; }
+  .header .meta { font-size: 14px; opacity: 0.85; }
+  .header .meta span { margin: 0 12px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .stat-label { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #1a73e8; }
+  .stat-value.low { color: #e65100; }
+  .stat-value.high { color: #2e7d32; }
+  .stat-sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid #1a73e8;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    font-size: 14px;
+  }
+  thead { background: #f0f4ff; }
+  th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  th:hover { background: #e3eaff; }
+  th.sort-asc::after { content: " ▲"; font-size: 11px; color: #1a73e8; }
+  th.sort-desc::after { content: " ▼"; font-size: 11px; color: #1a73e8; }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tbody tr:hover { background: #f8faff; }
+  tbody tr:nth-child(even) { background: #fcfcfe; }
+  tbody tr:nth-child(even):hover { background: #f8faff; }
+
+  .city-name { font-weight: 600; }
+  .wage-cell { font-weight: 600; color: #1a73e8; white-space: nowrap; }
+  .bar-cell { width: 200px; }
+  .bar {
+    height: 20px;
+    background: linear-gradient(90deg, #4fc3f7, #1a73e8);
+    border-radius: 4px;
+    min-width: 2px;
+    transition: width 0.3s;
+  }
+
+  .tag {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px 2px;
+    white-space: nowrap;
+  }
+
+  td a { color: #1a73e8; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+
+  .table-wrapper { overflow-x: auto; }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: #aaa;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>鱼泡网时薪数据报告</h1>
+    <div class="meta">
+      <span>关键词: 产线工人</span>
+      <span>城市: 全国</span>
+      <span>日期: 2026-07-04</span>
+      <span>岗位总数: 8</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">时薪均值</div>
+      <div class="stat-value">38.5 元/时</div>
+      <div class="stat-sub">基于 7 条有效数据</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">时薪中位数</div>
+      <div class="stat-value">30.8 元/时</div>
+      <div class="stat-sub">50% 分位</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">最低时薪</div>
+      <div class="stat-value low">25.0 元/时</div>
+      <div class="stat-sub">最低值</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">最高时薪</div>
+      <div class="stat-value high">67.3 元/时</div>
+      <div class="stat-sub">最高值</div>
+    </div></div>
+
+    <div class="section">
+      <div class="section-title">按城市分组的平均时薪对比</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>城市</th>
+              <th>岗位数</th>
+              <th>平均时薪</th>
+              <th>占比</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr>
+        <td class="city-name">南通</td>
+        <td>1</td>
+        <td class="wage-cell">67.3 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:100%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">哈密</td>
+        <td>1</td>
+        <td class="wage-cell">51.9 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:77.14285714285714%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">徐州</td>
+        <td>1</td>
+        <td class="wage-cell">40.4 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:60.00000000000001%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">鞍山</td>
+        <td>1</td>
+        <td class="wage-cell">30.8 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:45.714285714285715%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">唐山</td>
+        <td>1</td>
+        <td class="wage-cell">28.8 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:42.85714285714286%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">石家庄</td>
+        <td>1</td>
+        <td class="wage-cell">25.0 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:37.142857142857146%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">宿迁</td>
+        <td>1</td>
+        <td class="wage-cell">25.0 元/时</td>
+        <td class="bar-cell"><div class="bar" style="width:37.142857142857146%"></div></td>
+      </tr>
+      <tr>
+        <td class="city-name">福州</td>
+        <td>1</td>
+        <td class="wage-cell">-</td>
+        <td class="bar-cell"><div class="bar" style="width:0%"></div></td>
+      </tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">岗位列表（点击列头排序）</div>
+      <div class="table-wrapper">
+        <table id="jobsTable">
+          <thead>
+            <tr>
+              <th data-col="0" data-type="text">岗位标题</th>
+              <th data-col="1" data-type="text">公司</th>
+              <th data-col="2" data-type="text">城市</th>
+              <th data-col="3" data-type="text">薪资原文</th>
+              <th data-col="4" data-type="num">换算时薪</th>
+              <th data-col="5" data-type="date">发布时间</th>
+              <th data-col="6" data-type="text">标签</th>
+            </tr>
+          </thead>
+          <tbody id="jobsBody">
+      <tr data-sort-idx="0">
+        <td>生产线工人</td>
+        <td><a href="http://m.yupao.com/qiye/215733349.html" target="_blank">益源盛达管道科技（河北）有限公司</a></td>
+        <td>石家庄</td>
+        <td>6000-7000元/月</td>
+        <td data-sort-num="25">23.1-26.9 元/时</td>
+        <td data-sort-date="2026年07月04日 09:46">2026年07月04日 09:46</td>
+        <td><span class="tag">普工</span><span class="tag">6-10人</span><span class="tag">月结</span></td>
+      </tr>
+      <tr data-sort-idx="1">
+        <td>两班倒工人20名（派遣编制，待遇7000-10000）</td>
+        <td><a href="http://m.yupao.com/qiye/201791476.html" target="_blank">湖南奇士人力资源服务有限公司</a></td>
+        <td>唐山</td>
+        <td>7000-8000元/月</td>
+        <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+        <td data-sort-date="2026年07月04日 09:35">2026年07月04日 09:35</td>
+        <td><span class="tag">贴标签</span><span class="tag">车间</span><span class="tag">包吃</span><span class="tag">保险</span><span class="tag">加班补贴</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">11-20人</span><span class="tag">月结</span></td>
+      </tr>
+      <tr data-sort-idx="2">
+        <td>6k-8k招聘金属钣金类的生产跟单员</td>
+        <td><a href="http://m.yupao.com/qiye/170368879.html" target="_blank">福建鑫创兴晟制造有限公司</a></td>
+        <td>福州</td>
+        <td></td>
+        <td data-sort-num="-1">-</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">生产跟单</span></td>
+      </tr>
+      <tr data-sort-idx="3">
+        <td>南通崇川区钣金厂车间主任（5年以上工作经验，薪资待遇面议）</td>
+        <td><a href="http://m.yupao.com/qiye/163504986.html" target="_blank">祥能</a></td>
+        <td>南通</td>
+        <td>1.5-2万元/月</td>
+        <td data-sort-num="67.3076923076923">57.7-76.9 元/时</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">车间主任</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">5-10年</span><span class="tag">中专/中技</span><span class="tag">全职</span><span class="tag">熟练钣金加工工艺</span><span class="tag">有生产管理经验</span><span class="tag">机电设备经验</span><span class="tag">钣金工艺经验</span><span class="tag">机械加工制造经验</span><span class="tag">质量管理经验</span><span class="tag">精益改善经验</span></td>
+      </tr>
+      <tr data-sort-idx="4">
+        <td>生产组长</td>
+        <td><a href="http://m.yupao.com/qiye/198947143.html" target="_blank">江苏果鲜萃生物科技</a></td>
+        <td>宿迁</td>
+        <td>5000-8000元/月</td>
+        <td data-sort-num="25">19.2-30.8 元/时</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">生产组长/拉长</span><span class="tag">1-3年</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="5">
+        <td>车间主任</td>
+        <td><a href="http://m.yupao.com/qiye/17122072.html" target="_blank">新疆绿斯特能源有限公司</a></td>
+        <td>哈密</td>
+        <td>1.2-1.5万元/月</td>
+        <td data-sort-num="51.92307692307692">46.2-57.7 元/时</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">车间主任</span><span class="tag">包吃</span><span class="tag">免费培训</span><span class="tag">包住</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">3-5年</span><span class="tag">大专</span><span class="tag">全职</span><span class="tag">有生产管理经验</span><span class="tag">能源/环保/化工经验</span><span class="tag">质量管理经验</span><span class="tag">精益改善经验</span><span class="tag">AutoCAD</span></td>
+      </tr>
+      <tr data-sort-idx="6">
+        <td>机械下料车间主管</td>
+        <td><a href="http://m.yupao.com/qiye/70128461.html" target="_blank">徐州市茗尧机械制造有限公司</a></td>
+        <td>徐州</td>
+        <td>9000-12000元/月</td>
+        <td data-sort-num="40.38461538461539">34.6-46.2 元/时</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">主管</span><span class="tag">1-3年</span><span class="tag">大专</span><span class="tag">有生产管理经验</span><span class="tag">成型工艺经验</span><span class="tag">机加工工艺经验</span><span class="tag">机械加工制造经验</span><span class="tag">精益改善经验</span></td>
+      </tr>
+      <tr data-sort-idx="7">
+        <td>招聘主管（工厂用工需求）</td>
+        <td><a href="http://m.yupao.com/qiye/173134308.html" target="_blank">辽宁昊明食品</a></td>
+        <td>鞍山</td>
+        <td>6000-10000元/月</td>
+        <td data-sort-num="30.769230769230766">23.1-38.5 元/时</td>
+        <td data-sort-date=""></td>
+        <td><span class="tag">厂长/主管</span><span class="tag">1-3年</span><span class="tag">大专</span><span class="tag">蓝领岗位招聘</span><span class="tag">职能岗位招聘</span><span class="tag">技术岗位招聘</span></td>
+      </tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    数据来源: 鱼泡网 m.yupao.com · 生成时间: 2026/7/5 01:29:28
+  </div>
+
+<script>
+  (function() {
+    var sortCol = -1, sortDir = 1;
+    var headers = document.querySelectorAll('#jobsTable th');
+    headers.forEach(function(th) {
+      th.addEventListener('click', function() {
+        var col = parseInt(th.dataset.col);
+        var type = th.dataset.type;
+        if (sortCol === col) {
+          sortDir = -sortDir;
+        } else {
+          sortCol = col;
+          sortDir = 1;
+        }
+        headers.forEach(function(h) { h.classList.remove('sort-asc', 'sort-desc'); });
+        th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+
+        var tbody = document.getElementById('jobsBody');
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort(function(a, b) {
+          var cellA = a.children[col];
+          var cellB = b.children[col];
+          var valA, valB;
+          if (type === 'num') {
+            valA = parseFloat(cellA.dataset.sortNum) || -1;
+            valB = parseFloat(cellB.dataset.sortNum) || -1;
+          } else if (type === 'date') {
+            valA = cellA.dataset.sortDate || '';
+            valB = cellB.dataset.sortDate || '';
+          } else {
+            valA = cellA.textContent.trim();
+            valB = cellB.textContent.trim();
+          }
+          if (valA < valB) return -1 * sortDir;
+          if (valA > valB) return 1 * sortDir;
+          return 0;
+        });
+        rows.forEach(function(r) { tbody.appendChild(r); });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

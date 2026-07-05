@@ -1,0 +1,1678 @@
+{
+  "city": "深圳",
+  "category": "普工/技工",
+  "scrapeDate": "2026-07-05",
+  "totalJobs": 60,
+  "jobs": [
+    {
+      "title": "深圳包装工不压支包吃住当天入职",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710952809022x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "包装纸盒包吃住管理不严长白班不体检22",
+      "salaryRaw": "6500-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 7500,
+        "raw": "6500-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "25.0-28.8元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "阮先生",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "五险",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65592810355855x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳组装工包吃住岗位多好... 小程序",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-坪地",
+      "jobCategory": "组装工",
+      "tags": [
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65909868894378x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710950738360x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子普工岗月入8000人走账清",
+      "salaryRaw": "6000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 8000,
+        "raw": "6000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "23.1-30.8元/小时",
+      "company": "猫王（广东）互联网科技有限公司",
+      "contact": "气势磅礴de苗同学",
+      "city": "深圳",
+      "district": "宝安-沙井",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66743263220919x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳包装工不压支包吃住当天入职",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-宝龙",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710952317719x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "招暑假工包吃住普工独立岗位满16即可",
+      "salaryRaw": "6500-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 7500,
+        "raw": "6500-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "25.0-28.8元/小时",
+      "company": "深圳市诚展实业有限公司",
+      "contact": "王女士",
+      "city": "深圳",
+      "district": "坪山-坪山",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "周末双休"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66135474929813x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳组装工包吃住岗位多好安排",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-坪地",
+      "jobCategory": "组装工",
+      "tags": [
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710951587211x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-坪地",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66023202473877x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "门窗带班安装师傅",
+      "salaryRaw": "12000-18000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 12000,
+        "max": 18000,
+        "raw": "12000-18000元/月"
+      },
+      "hourlyWage": {
+        "min": 46.15384615384615,
+        "max": 69.23076923076923
+      },
+      "hourlyWageDisplay": "46.2-69.2元/小时",
+      "company": "深圳市洋瑞门窗有限公司",
+      "contact": "袁女士",
+      "city": "深圳",
+      "district": "罗湖-笋岗",
+      "jobCategory": "组装工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "交通补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/63978043761686x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳包装工不压支包吃住当天入职",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-宝龙",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710953030328x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "钢结构师傅（可学门窗安装，收入有保障）",
+      "salaryRaw": "9000-15000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 9000,
+        "max": 15000,
+        "raw": "9000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 34.61538461538461,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "34.6-57.7元/小时",
+      "company": "深圳市洋瑞门窗有限公司",
+      "contact": "袁女士",
+      "city": "深圳",
+      "district": "罗湖-笋岗",
+      "jobCategory": "组装工",
+      "tags": [
+        "五险",
+        "包住",
+        "交通补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66972966478243x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳组装工包吃住岗位多好安排",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-宝龙",
+      "jobCategory": "组装工",
+      "tags": [
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710970453275x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-坪地",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66023210548769x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子厂日结300cnc注塑机加工包吃包住",
+      "salaryRaw": "4000-18000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 4000,
+        "max": 18000,
+        "raw": "4000-18000元/月"
+      },
+      "hourlyWage": {
+        "min": 15.384615384615385,
+        "max": 69.23076923076923
+      },
+      "hourlyWageDisplay": "15.4-69.2元/小时",
+      "company": "深圳市小象即达网络科技有限公司",
+      "contact": "雷女士",
+      "city": "深圳",
+      "district": "罗湖-火车站",
+      "jobCategory": "操作工",
+      "tags": [
+        "五险一金",
+        "饭补",
+        "话补",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66720777394833x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳包装工不压支包吃住当天入职",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-坪地",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65909853022257x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "富鑫劳务有限公司/安装工2.5k起",
+      "salaryRaw": "2500-25000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 2500,
+        "max": 25000,
+        "raw": "2500-25000元/月"
+      },
+      "hourlyWage": {
+        "min": 9.615384615384615,
+        "max": 96.15384615384616
+      },
+      "hourlyWageDisplay": "9.6-96.2元/小时",
+      "company": "江华瑶族自治县幸福家庭农场",
+      "contact": "招聘专员",
+      "city": "深圳",
+      "district": "南山-海上世界",
+      "jobCategory": "组装工",
+      "tags": [
+        "经验不限",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66975850568089x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳组装工包吃住岗位多好安排",
+      "salaryRaw": "5000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6500,
+        "raw": "5000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 25
+      },
+      "hourlyWageDisplay": "19.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "龙岗-宝龙",
+      "jobCategory": "组装工",
+      "tags": [
+        "包吃",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710961523129x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65909869232442x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子厂日结300cnc注塑机加工包吃包住",
+      "salaryRaw": "4000-18000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 4000,
+        "max": 18000,
+        "raw": "4000-18000元/月"
+      },
+      "hourlyWage": {
+        "min": 15.384615384615385,
+        "max": 69.23076923076923
+      },
+      "hourlyWageDisplay": "15.4-69.2元/小时",
+      "company": "深圳市小象即达网络科技有限公司",
+      "contact": "雷女士",
+      "city": "深圳",
+      "district": "福田-保税区",
+      "jobCategory": "操作工",
+      "tags": [
+        "五险一金",
+        "饭补",
+        "话补",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66720658088210x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "管理不严做事轻松20食品加工员普工",
+      "salaryRaw": "4800-5500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 4800,
+        "max": 5500,
+        "raw": "4800-5500元/月"
+      },
+      "hourlyWage": {
+        "min": 18.46153846153846,
+        "max": 21.153846153846153
+      },
+      "hourlyWageDisplay": "18.5-21.2元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "刘女士",
+      "city": "深圳",
+      "district": "布吉-慢城",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "五险",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65748950548766x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "门窗厂门窗制作安装",
+      "salaryRaw": "5500-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 8000,
+        "raw": "5500-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "21.2-30.8元/小时",
+      "company": "深圳市骏宇卫浴有限公司",
+      "contact": "招聘专员",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "普工",
+      "tags": [
+        "饭补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65535366205742x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "热水器安装工",
+      "salaryRaw": "8000-15000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 8000,
+        "max": 15000,
+        "raw": "8000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 30.76923076923077,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "30.8-57.7元/小时",
+      "company": "深圳市南山区顺达康电器服务部",
+      "contact": "Cc",
+      "city": "深圳",
+      "district": "宝安-石岩",
+      "jobCategory": "组装工",
+      "tags": [
+        "招若干人",
+        "经验不限",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/58170301907345x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "深圳-盐田",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710968518025x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子厂日结300cnc注塑机加工包吃包住",
+      "salaryRaw": "4000-18000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 4000,
+        "max": 18000,
+        "raw": "4000-18000元/月"
+      },
+      "hourlyWage": {
+        "min": 15.384615384615385,
+        "max": 69.23076923076923
+      },
+      "hourlyWageDisplay": "15.4-69.2元/小时",
+      "company": "深圳市小象即达网络科技有限公司",
+      "contact": "雷女士",
+      "city": "深圳",
+      "district": "福田-下沙",
+      "jobCategory": "操作工",
+      "tags": [
+        "五险一金",
+        "饭补",
+        "话补",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66720637242763x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "数据线打包一轻松300一天包食宿",
+      "salaryRaw": "8000-8500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 8000,
+        "max": 8500,
+        "raw": "8000-8500元/月"
+      },
+      "hourlyWage": {
+        "min": 30.76923076923077,
+        "max": 32.69230769230769
+      },
+      "hourlyWageDisplay": "30.8-32.7元/小时",
+      "company": "深圳市新启程劳务派遣有限公司",
+      "contact": "王女士",
+      "city": "深圳",
+      "district": "坪山-坪山",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "饭补",
+        "话补",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66784385866143x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "空调安装师傅",
+      "salaryRaw": "8000-14000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 8000,
+        "max": 14000,
+        "raw": "8000-14000元/月"
+      },
+      "hourlyWage": {
+        "min": 30.76923076923077,
+        "max": 53.84615384615385
+      },
+      "hourlyWageDisplay": "30.8-53.8元/小时",
+      "company": "深圳市顺易制冷设备工程有限公司",
+      "contact": "招聘主管",
+      "city": "深圳",
+      "district": "布吉-下水径",
+      "jobCategory": "空调工",
+      "tags": [
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65860316805925x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "连接器磨床师傅",
+      "salaryRaw": "10000-13000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 10000,
+        "max": 13000,
+        "raw": "10000-13000元/月"
+      },
+      "hourlyWage": {
+        "min": 38.46153846153846,
+        "max": 50
+      },
+      "hourlyWageDisplay": "38.5-50.0元/小时",
+      "company": "深圳市精唯卓精密科技有限公司",
+      "contact": "缘",
+      "city": "深圳",
+      "district": "深圳-光明",
+      "jobCategory": "磨工/冲压工",
+      "tags": [
+        "包住",
+        "包吃",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66539934974345x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "深圳普工无经验要求厂吃厂住高工资",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "光正人力资源（深圳）有限公司",
+      "contact": "吕先生",
+      "city": "深圳",
+      "district": "深圳-宝安",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65710960761535x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "组装/装配工临时工",
+      "salaryRaw": "3000-8500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 3000,
+        "max": 8500,
+        "raw": "3000-8500元/月"
+      },
+      "hourlyWage": {
+        "min": 11.538461538461538,
+        "max": 32.69230769230769
+      },
+      "hourlyWageDisplay": "11.5-32.7元/小时",
+      "company": "深圳市环浪世纪科技有限公司",
+      "contact": "小野猫跳",
+      "city": "深圳",
+      "district": "龙岗-横岗",
+      "jobCategory": "组装工",
+      "tags": [
+        "经验不限",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66963418613944x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "宜家电器维修店/制冷/水暖工房补包吃",
+      "salaryRaw": "6000-9000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 9000,
+        "raw": "6000-9000元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 34.61538461538461
+      },
+      "hourlyWageDisplay": "23.1-34.6元/小时",
+      "company": "深圳市福田区宜家电器维修店",
+      "contact": "段生",
+      "city": "深圳",
+      "district": "福田-皇岗",
+      "jobCategory": "制冷/水暖工",
+      "tags": [
+        "房补",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66690812077840x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "亚克力激光雕刻工艺师傅丝印U打印有机玻璃",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "深圳市龙华区九八亚克力工艺制品商行（个体工商户）",
+      "contact": "马雄锋",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "操作工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "交通补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66819461560066x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "独立岗位20/小时包吃住... 小程序",
+      "salaryRaw": "6500-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 7500,
+        "raw": "6500-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "25.0-28.8元/小时",
+      "company": "清远市启航人力资源管理有限公司",
+      "contact": "杨女士",
+      "city": "深圳",
+      "district": "福田-上梅林",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65647629805093x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "汽车喷漆",
+      "salaryRaw": "3000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 3000,
+        "max": 8000,
+        "raw": "3000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 11.538461538461538,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "11.5-30.8元/小时",
+      "company": "深圳市博仕汽车服务有限公司",
+      "contact": "仁厚DE黎同学",
+      "city": "深圳",
+      "district": "深圳-南山",
+      "jobCategory": "油漆工",
+      "tags": [
+        "经验不限",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66957072642480x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "数控车床",
+      "salaryRaw": "10000-14000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 10000,
+        "max": 14000,
+        "raw": "10000-14000元/月"
+      },
+      "hourlyWage": {
+        "min": 38.46153846153846,
+        "max": 53.84615384615385
+      },
+      "hourlyWageDisplay": "38.5-53.8元/小时",
+      "company": "深圳市诚品达精密机械有限公司",
+      "contact": "养猫的张小喵",
+      "city": "深圳",
+      "district": "宝安-沙井",
+      "jobCategory": "CNC/数控工程师",
+      "tags": [
+        "经验6-7年",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpjixie/66455862874122x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "手机维修",
+      "salaryRaw": "10000-15000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 10000,
+        "max": 15000,
+        "raw": "10000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 38.46153846153846,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "38.5-57.7元/小时",
+      "company": "深圳市乾顺电子贸易有限公司",
+      "contact": "爱拍晚霞的阿晨",
+      "city": "深圳",
+      "district": "福田-华强南",
+      "jobCategory": "手机维修",
+      "tags": [
+        "经验3-5年",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66534407528195x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "早九晚七招聘专员/助理",
+      "salaryRaw": "5000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 8000,
+        "raw": "5000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "19.2-30.8元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "梁先生",
+      "city": "深圳",
+      "district": "布吉-慢城",
+      "jobCategory": "招聘专员/助理",
+      "tags": [
+        "包住",
+        "五险"
+      ],
+      "detailUrl": "https://m.58.com/sz/renli/65591574284700x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "联想电脑普工/操作工提供吃住24元/时",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "深圳市国通劳务派遣管理有限公司",
+      "contact": "M摸不透屈总",
+      "city": "深圳",
+      "district": "光明-光明",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65581536087562x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "临水临电全职招聘",
+      "salaryRaw": "7000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 8000,
+        "raw": "7000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "26.9-30.8元/小时",
+      "company": "深圳橡果建筑工程有限公司",
+      "contact": "喜欢折纸的阿杰",
+      "city": "深圳",
+      "district": "宝安-沙井",
+      "jobCategory": "电力线路工",
+      "tags": [
+        "经验3-5年",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66959621395340x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "高薪玩具厂（长白班/普工）7500每月",
+      "salaryRaw": "6000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 8000,
+        "raw": "6000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "23.1-30.8元/小时",
+      "company": "科迅",
+      "contact": "刘先生",
+      "city": "深圳",
+      "district": "深圳-光明",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "五险",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65600271383971x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "小米品牌空调安装维修师傅",
+      "salaryRaw": "9000-14000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 9000,
+        "max": 14000,
+        "raw": "9000-14000元/月"
+      },
+      "hourlyWage": {
+        "min": 34.61538461538461,
+        "max": 53.84615384615385
+      },
+      "hourlyWageDisplay": "34.6-53.8元/小时",
+      "company": "惠修（深圳）网络有限公司",
+      "contact": "张先生",
+      "city": "深圳",
+      "district": "布吉-布吉关",
+      "jobCategory": "空调工",
+      "tags": [
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65771932941202x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "样品制作员包吃住",
+      "salaryRaw": "6500-7000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 7000,
+        "raw": "6500-7000元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 26.923076923076923
+      },
+      "hourlyWageDisplay": "25.0-26.9元/小时",
+      "company": "深圳市跃登电业有限公司",
+      "contact": "刘生",
+      "city": "深圳",
+      "district": "宝安-沙井",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "五险"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65626886265782x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "打包装长白班坐班管理不严走账清可借支23",
+      "salaryRaw": "6500-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 7500,
+        "raw": "6500-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "25.0-28.8元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "张女士",
+      "city": "深圳",
+      "district": "深圳-宝安",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "五险",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65768230060955x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "数控车工",
+      "salaryRaw": "12000-15000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 12000,
+        "max": 15000,
+        "raw": "12000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 46.15384615384615,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "46.2-57.7元/小时",
+      "company": "深圳市卓轩恒科技有限公司",
+      "contact": "郭生",
+      "city": "深圳",
+      "district": "深圳-光明",
+      "jobCategory": "CNC/数控工程师",
+      "tags": [
+        "五险一金",
+        "包住"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpjixie/49818880084512x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "包装工包吃包住",
+      "salaryRaw": "5500-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 6500,
+        "raw": "5500-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 25
+      },
+      "hourlyWageDisplay": "21.2-25.0元/小时",
+      "company": "深圳市新启程劳务派遣有限公司",
+      "contact": "会做梦的小熊",
+      "city": "深圳",
+      "district": "龙岗-平湖",
+      "jobCategory": "包装工",
+      "tags": [
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66496202050077x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "空调安装师傅",
+      "salaryRaw": "10000-20000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 10000,
+        "max": 20000,
+        "raw": "10000-20000元/月"
+      },
+      "hourlyWage": {
+        "min": 38.46153846153846,
+        "max": 76.92307692307692
+      },
+      "hourlyWageDisplay": "38.5-76.9元/小时",
+      "company": "深圳市顺民益电器有限公司",
+      "contact": "高先生",
+      "city": "深圳",
+      "district": "龙华-龙华",
+      "jobCategory": "制冷/水暖工",
+      "tags": [
+        "五险一金",
+        "交通补助",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/29409275181253x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "五金模具师傅",
+      "salaryRaw": "7000-10000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 10000,
+        "raw": "7000-10000元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 38.46153846153846
+      },
+      "hourlyWageDisplay": "26.9-38.5元/小时",
+      "company": "深圳市创为精密五金有限公司",
+      "contact": "肖国平",
+      "city": "深圳",
+      "district": "龙岗-平湖",
+      "jobCategory": "铸造/注塑/模具工",
+      "tags": [
+        "五险一金",
+        "加班补助",
+        "饭补",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/58273714380957x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "高新世纪科技手机商行/手机组装/7千起",
+      "salaryRaw": "7000-15000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 15000,
+        "raw": "7000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "26.9-57.7元/小时",
+      "company": "深圳市福田区高新世纪科技手机商行",
+      "contact": "陈先生",
+      "city": "深圳",
+      "district": "福田-华强南",
+      "jobCategory": "手机维修",
+      "tags": [
+        "经验1-2年",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65637141510150x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "急招包装工/可日结270/天不体检白班",
+      "salaryRaw": "6000-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 7500,
+        "raw": "6000-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "23.1-28.8元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "陈女士",
+      "city": "深圳",
+      "district": "坪山-坪山",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66367399949112x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "急招冲压普工包住五险",
+      "salaryRaw": "5000-6000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 6000,
+        "raw": "5000-6000元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 23.076923076923077
+      },
+      "hourlyWageDisplay": "19.2-23.1元/小时",
+      "company": "唐荣电器（深圳）有限公司",
+      "contact": "黄小姐",
+      "city": "深圳",
+      "district": "宝安-石岩",
+      "jobCategory": "普工",
+      "tags": [
+        "包住",
+        "五险"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66078350791572x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "长白班路由器组装贴标岗位月入7000",
+      "salaryRaw": "6500-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 8000,
+        "raw": "6500-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "25.0-30.8元/小时",
+      "company": "广东快薪人力资源有限公司",
+      "contact": "蔡女士",
+      "city": "深圳",
+      "district": "龙华-大浪",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66367337731374x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "普工包吃住",
+      "salaryRaw": "5500-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 8000,
+        "raw": "5500-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "21.2-30.8元/小时",
+      "company": "深圳国特尔科技有限公司",
+      "contact": "吴先生",
+      "city": "深圳",
+      "district": "深圳",
+      "jobCategory": "普工",
+      "tags": [
+        "包吃",
+        "包住",
+        "五险一金"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/64394634837396x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "急招、普工可借支人走清帐",
+      "salaryRaw": "6000-6500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 6500,
+        "raw": "6000-6500元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 25
+      },
+      "hourlyWageDisplay": "23.1-25.0元/小时",
+      "company": "深圳市恒旺劳务派遣有限公司",
+      "contact": "陈女士",
+      "city": "深圳",
+      "district": "宝安-福永",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "五险",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/62156587010236x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "比亚迪工厂高薪急招/组装/装配工/包住",
+      "salaryRaw": "7000-8500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 8500,
+        "raw": "7000-8500元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 32.69230769230769
+      },
+      "hourlyWageDisplay": "26.9-32.7元/小时",
+      "company": "比亚迪汽车工业有限公司",
+      "contact": "赵先生",
+      "city": "深圳",
+      "district": "坪山-坪山",
+      "jobCategory": "组装工",
+      "tags": [
+        "五险一金"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66115588727964x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "修理厂汽车钣金工房补五险",
+      "salaryRaw": "7000-11000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 11000,
+        "raw": "7000-11000元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 42.30769230769231
+      },
+      "hourlyWageDisplay": "26.9-42.3元/小时",
+      "company": "小饶汽修店",
+      "contact": "招聘专员",
+      "city": "深圳",
+      "district": "龙岗-坂田",
+      "jobCategory": "钣金工",
+      "tags": [
+        "房补",
+        "五险"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66575707552682x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "验货包装工包吃包住",
+      "salaryRaw": "4000-6000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 4000,
+        "max": 6000,
+        "raw": "4000-6000元/月"
+      },
+      "hourlyWage": {
+        "min": 15.384615384615385,
+        "max": 23.076923076923077
+      },
+      "hourlyWageDisplay": "15.4-23.1元/小时",
+      "company": "深圳市心凭褶艺纺织有限公司",
+      "contact": "徐女士",
+      "city": "深圳",
+      "district": "宝安-固戍",
+      "jobCategory": "包装工",
+      "tags": [
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66053542677558x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "小厂自由包三餐可带手机不体检包装工",
+      "salaryRaw": "6500-8500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6500,
+        "max": 8500,
+        "raw": "6500-8500元/月"
+      },
+      "hourlyWage": {
+        "min": 25,
+        "max": 32.69230769230769
+      },
+      "hourlyWageDisplay": "25.0-32.7元/小时",
+      "company": "众信达",
+      "contact": "张女士",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "包装工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/63824060103336x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "手机电子厂长白班坐班包三餐不体检人走账清",
+      "salaryRaw": "5500-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5500,
+        "max": 7500,
+        "raw": "5500-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 21.153846153846153,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "21.2-28.8元/小时",
+      "company": "惠州市久阳实业有限公司",
+      "contact": "张女士",
+      "city": "深圳",
+      "district": "深圳-宝安",
+      "jobCategory": "普工",
+      "tags": [
+        "包住",
+        "包吃",
+        "交通补助",
+        "加班补助"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/65500678371484x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子厂招聘普工短期工包吃住月薪7k",
+      "salaryRaw": "5000-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 7500,
+        "raw": "5000-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "19.2-28.8元/小时",
+      "company": "惠州市久阳实业有限公司",
+      "contact": "杨先生",
+      "city": "深圳",
+      "district": "深圳-龙岗",
+      "jobCategory": "普工",
+      "tags": [
+        "五险一金",
+        "包住",
+        "包吃",
+        "房补"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66221937389223x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    },
+    {
+      "title": "电子厂普工/操作工5千起",
+      "salaryRaw": "5000-7500元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 7500,
+        "raw": "5000-7500元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 28.846153846153847
+      },
+      "hourlyWageDisplay": "19.2-28.8元/小时",
+      "company": "深圳市天坤风云劳务派遣有限公司",
+      "contact": "朱女士",
+      "city": "深圳",
+      "district": "宝安-松岗",
+      "jobCategory": "普工",
+      "tags": [
+        "经验不限",
+        "学历不限"
+      ],
+      "detailUrl": "https://m.58.com/sz/zpshengchankaifa/66639780867132x.shtml",
+      "source": "58同城",
+      "searchKeyword": "普工/技工"
+    }
+  ]
+}

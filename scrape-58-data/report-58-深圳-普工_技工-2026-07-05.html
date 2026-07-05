@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>58同城时薪报告 - 深圳 - 2026-07-05</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  .header {
+    background: linear-gradient(135deg, #ff6a00, #d32f2f);
+    color: #fff;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .header h1 { font-size: 24px; margin-bottom: 8px; }
+  .header .meta { font-size: 14px; opacity: 0.9; }
+  .header .meta span { margin: 0 12px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .stat-label { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #ff6a00; }
+  .stat-sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid #ff6a00;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    font-size: 14px;
+  }
+  thead { background: #fff3e0; }
+  th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  th:hover { background: #ffe0b2; }
+  th.sort-asc::after { content: " ▲"; font-size: 11px; color: #ff6a00; }
+  th.sort-desc::after { content: " ▼"; font-size: 11px; color: #ff6a00; }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tbody tr:hover { background: #fff8f0; }
+  tbody tr:nth-child(even) { background: #fcfcfe; }
+  tbody tr:nth-child(even):hover { background: #fff8f0; }
+
+  .tag {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px;
+    white-space: nowrap;
+  }
+
+  td a { color: #ff6a00; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+
+  .table-wrapper { overflow-x: auto; }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: #aaa;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>58同城时薪数据报告</h1>
+    <div class="meta">
+      <span>城市: 深圳</span>
+      <span>分类: 普工/技工</span>
+      <span>日期: 2026-07-05</span>
+      <span>岗位总数: 60</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">总岗位数</div>
+      <div class="stat-value">60</div>
+      <div class="stat-sub">深圳 · 普工/技工</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">时薪均值</div>
+      <div class="stat-value">30.4 元/时</div>
+      <div class="stat-sub">基于 60 条有效数据</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">时薪中位数</div>
+      <div class="stat-value">26.0 元/时</div>
+      <div class="stat-sub">50% 分位</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">时薪范围</div>
+      <div class="stat-value" style="font-size:18px">19.2 元/时 ~ 57.7 元/时</div>
+      <div class="stat-sub">最低 ~ 最高</div>
+    </div></div>
+
+    <div class="section">
+      <div class="section-title">岗位列表（点击列头排序）</div>
+      <div class="table-wrapper">
+        <table id="jobsTable">
+          <thead>
+            <tr>
+              <th data-col="0" data-type="text">岗位标题</th>
+              <th data-col="1" data-type="text">公司</th>
+              <th data-col="2" data-type="text">地区</th>
+              <th data-col="3" data-type="text">职位类别</th>
+              <th data-col="4" data-type="text">薪资原文</th>
+              <th data-col="5" data-type="num">换算时薪</th>
+              <th data-col="6" data-type="text">联系人</th>
+              <th data-col="7" data-type="text">标签</th>
+            </tr>
+          </thead>
+          <tbody id="jobsBody">
+      <tr data-sort-idx="0">
+        <td>深圳包装工不压支包吃住当天入职</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710952809022x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>包装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="1">
+        <td>包装纸盒包吃住管理不严长白班不体检22</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65592810355855x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>包装工</td>
+        <td>6500-7500元/月</td>
+        <td data-sort-num="26.923076923076923">25.0-28.8 元/时</td>
+        <td>阮先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="2">
+        <td>深圳组装工包吃住岗位多好... 小程序</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65909868894378x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-坪地</td>
+        <td>组装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="3">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710950738360x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="4">
+        <td>电子普工岗月入8000人走账清</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66743263220919x.shtml" target="_blank">猫王（广东）互联网科技有限公司</a></td>
+        <td>宝安-沙井</td>
+        <td>包装工</td>
+        <td>6000-8000元/月</td>
+        <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+        <td>气势磅礴de苗同学</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="5">
+        <td>深圳包装工不压支包吃住当天入职</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710952317719x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-宝龙</td>
+        <td>包装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="6">
+        <td>招暑假工包吃住普工独立岗位满16即可</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66135474929813x.shtml" target="_blank">深圳市诚展实业有限公司</a></td>
+        <td>坪山-坪山</td>
+        <td>普工</td>
+        <td>6500-7500元/月</td>
+        <td data-sort-num="26.923076923076923">25.0-28.8 元/时</td>
+        <td>王女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">周末双休</span></td>
+      </tr>
+      <tr data-sort-idx="7">
+        <td>深圳组装工包吃住岗位多好安排</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710951587211x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-坪地</td>
+        <td>组装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="8">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66023202473877x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-坪地</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="9">
+        <td>门窗带班安装师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/63978043761686x.shtml" target="_blank">深圳市洋瑞门窗有限公司</a></td>
+        <td>罗湖-笋岗</td>
+        <td>组装工</td>
+        <td>12000-18000元/月</td>
+        <td data-sort-num="57.69230769230769">46.2-69.2 元/时</td>
+        <td>袁女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">交通补助</span></td>
+      </tr>
+      <tr data-sort-idx="10">
+        <td>深圳包装工不压支包吃住当天入职</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710953030328x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-宝龙</td>
+        <td>包装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="11">
+        <td>钢结构师傅（可学门窗安装，收入有保障）</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66972966478243x.shtml" target="_blank">深圳市洋瑞门窗有限公司</a></td>
+        <td>罗湖-笋岗</td>
+        <td>组装工</td>
+        <td>9000-15000元/月</td>
+        <td data-sort-num="46.15384615384615">34.6-57.7 元/时</td>
+        <td>袁女士</td>
+        <td><span class="tag">五险</span><span class="tag">包住</span><span class="tag">交通补助</span></td>
+      </tr>
+      <tr data-sort-idx="12">
+        <td>深圳组装工包吃住岗位多好安排</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710970453275x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-宝龙</td>
+        <td>组装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="13">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66023210548769x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-坪地</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="14">
+        <td>电子厂日结300cnc注塑机加工包吃包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66720777394833x.shtml" target="_blank">深圳市小象即达网络科技有限公司</a></td>
+        <td>罗湖-火车站</td>
+        <td>操作工</td>
+        <td>4000-18000元/月</td>
+        <td data-sort-num="42.30769230769231">15.4-69.2 元/时</td>
+        <td>雷女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">饭补</span><span class="tag">话补</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="15">
+        <td>深圳包装工不压支包吃住当天入职</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65909853022257x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-坪地</td>
+        <td>包装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="16">
+        <td>富鑫劳务有限公司/安装工2.5k起</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66975850568089x.shtml" target="_blank">江华瑶族自治县幸福家庭农场</a></td>
+        <td>南山-海上世界</td>
+        <td>组装工</td>
+        <td>2500-25000元/月</td>
+        <td data-sort-num="52.88461538461539">9.6-96.2 元/时</td>
+        <td>招聘专员</td>
+        <td><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="17">
+        <td>深圳组装工包吃住岗位多好安排</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710961523129x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>龙岗-宝龙</td>
+        <td>组装工</td>
+        <td>5000-6500元/月</td>
+        <td data-sort-num="22.115384615384613">19.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="18">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65909869232442x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="19">
+        <td>电子厂日结300cnc注塑机加工包吃包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66720658088210x.shtml" target="_blank">深圳市小象即达网络科技有限公司</a></td>
+        <td>福田-保税区</td>
+        <td>操作工</td>
+        <td>4000-18000元/月</td>
+        <td data-sort-num="42.30769230769231">15.4-69.2 元/时</td>
+        <td>雷女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">饭补</span><span class="tag">话补</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="20">
+        <td>管理不严做事轻松20食品加工员普工</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65748950548766x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>布吉-慢城</td>
+        <td>普工</td>
+        <td>4800-5500元/月</td>
+        <td data-sort-num="19.807692307692307">18.5-21.2 元/时</td>
+        <td>刘女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="21">
+        <td>门窗厂门窗制作安装</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65535366205742x.shtml" target="_blank">深圳市骏宇卫浴有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>普工</td>
+        <td>5500-8000元/月</td>
+        <td data-sort-num="25.96153846153846">21.2-30.8 元/时</td>
+        <td>招聘专员</td>
+        <td><span class="tag">饭补</span></td>
+      </tr>
+      <tr data-sort-idx="22">
+        <td>热水器安装工</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/58170301907345x.shtml" target="_blank">深圳市南山区顺达康电器服务部</a></td>
+        <td>宝安-石岩</td>
+        <td>组装工</td>
+        <td>8000-15000元/月</td>
+        <td data-sort-num="44.23076923076923">30.8-57.7 元/时</td>
+        <td>Cc</td>
+        <td><span class="tag">招若干人</span><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="23">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710968518025x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>深圳-盐田</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="24">
+        <td>电子厂日结300cnc注塑机加工包吃包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66720637242763x.shtml" target="_blank">深圳市小象即达网络科技有限公司</a></td>
+        <td>福田-下沙</td>
+        <td>操作工</td>
+        <td>4000-18000元/月</td>
+        <td data-sort-num="42.30769230769231">15.4-69.2 元/时</td>
+        <td>雷女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">饭补</span><span class="tag">话补</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="25">
+        <td>数据线打包一轻松300一天包食宿</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66784385866143x.shtml" target="_blank">深圳市新启程劳务派遣有限公司</a></td>
+        <td>坪山-坪山</td>
+        <td>普工</td>
+        <td>8000-8500元/月</td>
+        <td data-sort-num="31.730769230769234">30.8-32.7 元/时</td>
+        <td>王女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">饭补</span><span class="tag">话补</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="26">
+        <td>空调安装师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65860316805925x.shtml" target="_blank">深圳市顺易制冷设备工程有限公司</a></td>
+        <td>布吉-下水径</td>
+        <td>空调工</td>
+        <td>8000-14000元/月</td>
+        <td data-sort-num="42.30769230769231">30.8-53.8 元/时</td>
+        <td>招聘主管</td>
+        <td><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="27">
+        <td>连接器磨床师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66539934974345x.shtml" target="_blank">深圳市精唯卓精密科技有限公司</a></td>
+        <td>深圳-光明</td>
+        <td>磨工/冲压工</td>
+        <td>10000-13000元/月</td>
+        <td data-sort-num="44.230769230769226">38.5-50.0 元/时</td>
+        <td>缘</td>
+        <td><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="28">
+        <td>深圳普工无经验要求厂吃厂住高工资</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65710960761535x.shtml" target="_blank">光正人力资源（深圳）有限公司</a></td>
+        <td>深圳-宝安</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>吕先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="29">
+        <td>组装/装配工临时工</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66963418613944x.shtml" target="_blank">深圳市环浪世纪科技有限公司</a></td>
+        <td>龙岗-横岗</td>
+        <td>组装工</td>
+        <td>3000-8500元/月</td>
+        <td data-sort-num="22.115384615384617">11.5-32.7 元/时</td>
+        <td>小野猫跳</td>
+        <td><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="30">
+        <td>宜家电器维修店/制冷/水暖工房补包吃</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66690812077840x.shtml" target="_blank">深圳市福田区宜家电器维修店</a></td>
+        <td>福田-皇岗</td>
+        <td>制冷/水暖工</td>
+        <td>6000-9000元/月</td>
+        <td data-sort-num="28.846153846153847">23.1-34.6 元/时</td>
+        <td>段生</td>
+        <td><span class="tag">房补</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="31">
+        <td>亚克力激光雕刻工艺师傅丝印U打印有机玻璃</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66819461560066x.shtml" target="_blank">深圳市龙华区九八亚克力工艺制品商行（个体工商户）</a></td>
+        <td>深圳-龙岗</td>
+        <td>操作工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>马雄锋</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">交通补助</span></td>
+      </tr>
+      <tr data-sort-idx="32">
+        <td>独立岗位20/小时包吃住... 小程序</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65647629805093x.shtml" target="_blank">清远市启航人力资源管理有限公司</a></td>
+        <td>福田-上梅林</td>
+        <td>普工</td>
+        <td>6500-7500元/月</td>
+        <td data-sort-num="26.923076923076923">25.0-28.8 元/时</td>
+        <td>杨女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="33">
+        <td>汽车喷漆</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66957072642480x.shtml" target="_blank">深圳市博仕汽车服务有限公司</a></td>
+        <td>深圳-南山</td>
+        <td>油漆工</td>
+        <td>3000-8000元/月</td>
+        <td data-sort-num="21.153846153846153">11.5-30.8 元/时</td>
+        <td>仁厚DE黎同学</td>
+        <td><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="34">
+        <td>数控车床</td>
+        <td><a href="https://m.58.com/sz/zpjixie/66455862874122x.shtml" target="_blank">深圳市诚品达精密机械有限公司</a></td>
+        <td>宝安-沙井</td>
+        <td>CNC/数控工程师</td>
+        <td>10000-14000元/月</td>
+        <td data-sort-num="46.15384615384615">38.5-53.8 元/时</td>
+        <td>养猫的张小喵</td>
+        <td><span class="tag">经验6-7年</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="35">
+        <td>手机维修</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66534407528195x.shtml" target="_blank">深圳市乾顺电子贸易有限公司</a></td>
+        <td>福田-华强南</td>
+        <td>手机维修</td>
+        <td>10000-15000元/月</td>
+        <td data-sort-num="48.07692307692308">38.5-57.7 元/时</td>
+        <td>爱拍晚霞的阿晨</td>
+        <td><span class="tag">经验3-5年</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="36">
+        <td>早九晚七招聘专员/助理</td>
+        <td><a href="https://m.58.com/sz/renli/65591574284700x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>布吉-慢城</td>
+        <td>招聘专员/助理</td>
+        <td>5000-8000元/月</td>
+        <td data-sort-num="25">19.2-30.8 元/时</td>
+        <td>梁先生</td>
+        <td><span class="tag">包住</span><span class="tag">五险</span></td>
+      </tr>
+      <tr data-sort-idx="37">
+        <td>联想电脑普工/操作工提供吃住24元/时</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65581536087562x.shtml" target="_blank">深圳市国通劳务派遣管理有限公司</a></td>
+        <td>光明-光明</td>
+        <td>普工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>M摸不透屈总</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="38">
+        <td>临水临电全职招聘</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66959621395340x.shtml" target="_blank">深圳橡果建筑工程有限公司</a></td>
+        <td>宝安-沙井</td>
+        <td>电力线路工</td>
+        <td>7000-8000元/月</td>
+        <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+        <td>喜欢折纸的阿杰</td>
+        <td><span class="tag">经验3-5年</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="39">
+        <td>高薪玩具厂（长白班/普工）7500每月</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65600271383971x.shtml" target="_blank">科迅</a></td>
+        <td>深圳-光明</td>
+        <td>普工</td>
+        <td>6000-8000元/月</td>
+        <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+        <td>刘先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="40">
+        <td>小米品牌空调安装维修师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65771932941202x.shtml" target="_blank">惠修（深圳）网络有限公司</a></td>
+        <td>布吉-布吉关</td>
+        <td>空调工</td>
+        <td>9000-14000元/月</td>
+        <td data-sort-num="44.230769230769226">34.6-53.8 元/时</td>
+        <td>张先生</td>
+        <td><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="41">
+        <td>样品制作员包吃住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65626886265782x.shtml" target="_blank">深圳市跃登电业有限公司</a></td>
+        <td>宝安-沙井</td>
+        <td>普工</td>
+        <td>6500-7000元/月</td>
+        <td data-sort-num="25.96153846153846">25.0-26.9 元/时</td>
+        <td>刘生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">五险</span></td>
+      </tr>
+      <tr data-sort-idx="42">
+        <td>打包装长白班坐班管理不严走账清可借支23</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65768230060955x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>深圳-宝安</td>
+        <td>包装工</td>
+        <td>6500-7500元/月</td>
+        <td data-sort-num="26.923076923076923">25.0-28.8 元/时</td>
+        <td>张女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="43">
+        <td>数控车工</td>
+        <td><a href="https://m.58.com/sz/zpjixie/49818880084512x.shtml" target="_blank">深圳市卓轩恒科技有限公司</a></td>
+        <td>深圳-光明</td>
+        <td>CNC/数控工程师</td>
+        <td>12000-15000元/月</td>
+        <td data-sort-num="51.92307692307692">46.2-57.7 元/时</td>
+        <td>郭生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span></td>
+      </tr>
+      <tr data-sort-idx="44">
+        <td>包装工包吃包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66496202050077x.shtml" target="_blank">深圳市新启程劳务派遣有限公司</a></td>
+        <td>龙岗-平湖</td>
+        <td>包装工</td>
+        <td>5500-6500元/月</td>
+        <td data-sort-num="23.076923076923077">21.2-25.0 元/时</td>
+        <td>会做梦的小熊</td>
+        <td><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="45">
+        <td>空调安装师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/29409275181253x.shtml" target="_blank">深圳市顺民益电器有限公司</a></td>
+        <td>龙华-龙华</td>
+        <td>制冷/水暖工</td>
+        <td>10000-20000元/月</td>
+        <td data-sort-num="57.69230769230769">38.5-76.9 元/时</td>
+        <td>高先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">交通补助</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="46">
+        <td>五金模具师傅</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/58273714380957x.shtml" target="_blank">深圳市创为精密五金有限公司</a></td>
+        <td>龙岗-平湖</td>
+        <td>铸造/注塑/模具工</td>
+        <td>7000-10000元/月</td>
+        <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+        <td>肖国平</td>
+        <td><span class="tag">五险一金</span><span class="tag">加班补助</span><span class="tag">饭补</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="47">
+        <td>高新世纪科技手机商行/手机组装/7千起</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65637141510150x.shtml" target="_blank">深圳市福田区高新世纪科技手机商行</a></td>
+        <td>福田-华强南</td>
+        <td>手机维修</td>
+        <td>7000-15000元/月</td>
+        <td data-sort-num="42.30769230769231">26.9-57.7 元/时</td>
+        <td>陈先生</td>
+        <td><span class="tag">经验1-2年</span><span class="tag">学历不限</span></td>
+      </tr>
+      <tr data-sort-idx="48">
+        <td>急招包装工/可日结270/天不体检白班</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66367399949112x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>坪山-坪山</td>
+        <td>普工</td>
+        <td>6000-7500元/月</td>
+        <td data-sort-num="25.96153846153846">23.1-28.8 元/时</td>
+        <td>陈女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="49">
+        <td>急招冲压普工包住五险</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66078350791572x.shtml" target="_blank">唐荣电器（深圳）有限公司</a></td>
+        <td>宝安-石岩</td>
+        <td>普工</td>
+        <td>5000-6000元/月</td>
+        <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+        <td>黄小姐</td>
+        <td><span class="tag">包住</span><span class="tag">五险</span></td>
+      </tr>
+      <tr data-sort-idx="50">
+        <td>长白班路由器组装贴标岗位月入7000</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66367337731374x.shtml" target="_blank">广东快薪人力资源有限公司</a></td>
+        <td>龙华-大浪</td>
+        <td>包装工</td>
+        <td>6500-8000元/月</td>
+        <td data-sort-num="27.884615384615387">25.0-30.8 元/时</td>
+        <td>蔡女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="51">
+        <td>普工包吃住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/64394634837396x.shtml" target="_blank">深圳国特尔科技有限公司</a></td>
+        <td>深圳</td>
+        <td>普工</td>
+        <td>5500-8000元/月</td>
+        <td data-sort-num="25.96153846153846">21.2-30.8 元/时</td>
+        <td>吴先生</td>
+        <td><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">五险一金</span></td>
+      </tr>
+      <tr data-sort-idx="52">
+        <td>急招、普工可借支人走清帐</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/62156587010236x.shtml" target="_blank">深圳市恒旺劳务派遣有限公司</a></td>
+        <td>宝安-福永</td>
+        <td>包装工</td>
+        <td>6000-6500元/月</td>
+        <td data-sort-num="24.03846153846154">23.1-25.0 元/时</td>
+        <td>陈女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">五险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="53">
+        <td>比亚迪工厂高薪急招/组装/装配工/包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66115588727964x.shtml" target="_blank">比亚迪汽车工业有限公司</a></td>
+        <td>坪山-坪山</td>
+        <td>组装工</td>
+        <td>7000-8500元/月</td>
+        <td data-sort-num="29.807692307692307">26.9-32.7 元/时</td>
+        <td>赵先生</td>
+        <td><span class="tag">五险一金</span></td>
+      </tr>
+      <tr data-sort-idx="54">
+        <td>修理厂汽车钣金工房补五险</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66575707552682x.shtml" target="_blank">小饶汽修店</a></td>
+        <td>龙岗-坂田</td>
+        <td>钣金工</td>
+        <td>7000-11000元/月</td>
+        <td data-sort-num="34.61538461538461">26.9-42.3 元/时</td>
+        <td>招聘专员</td>
+        <td><span class="tag">房补</span><span class="tag">五险</span></td>
+      </tr>
+      <tr data-sort-idx="55">
+        <td>验货包装工包吃包住</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66053542677558x.shtml" target="_blank">深圳市心凭褶艺纺织有限公司</a></td>
+        <td>宝安-固戍</td>
+        <td>包装工</td>
+        <td>4000-6000元/月</td>
+        <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+        <td>徐女士</td>
+        <td><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="56">
+        <td>小厂自由包三餐可带手机不体检包装工</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/63824060103336x.shtml" target="_blank">众信达</a></td>
+        <td>深圳-龙岗</td>
+        <td>包装工</td>
+        <td>6500-8500元/月</td>
+        <td data-sort-num="28.846153846153847">25.0-32.7 元/时</td>
+        <td>张女士</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+      </tr>
+      <tr data-sort-idx="57">
+        <td>手机电子厂长白班坐班包三餐不体检人走账清</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/65500678371484x.shtml" target="_blank">惠州市久阳实业有限公司</a></td>
+        <td>深圳-宝安</td>
+        <td>普工</td>
+        <td>5500-7500元/月</td>
+        <td data-sort-num="25">21.2-28.8 元/时</td>
+        <td>张女士</td>
+        <td><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">交通补助</span><span class="tag">加班补助</span></td>
+      </tr>
+      <tr data-sort-idx="58">
+        <td>电子厂招聘普工短期工包吃住月薪7k</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66221937389223x.shtml" target="_blank">惠州市久阳实业有限公司</a></td>
+        <td>深圳-龙岗</td>
+        <td>普工</td>
+        <td>5000-7500元/月</td>
+        <td data-sort-num="24.03846153846154">19.2-28.8 元/时</td>
+        <td>杨先生</td>
+        <td><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">房补</span></td>
+      </tr>
+      <tr data-sort-idx="59">
+        <td>电子厂普工/操作工5千起</td>
+        <td><a href="https://m.58.com/sz/zpshengchankaifa/66639780867132x.shtml" target="_blank">深圳市天坤风云劳务派遣有限公司</a></td>
+        <td>宝安-松岗</td>
+        <td>普工</td>
+        <td>5000-7500元/月</td>
+        <td data-sort-num="24.03846153846154">19.2-28.8 元/时</td>
+        <td>朱女士</td>
+        <td><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+      </tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    数据来源: 58同城 m.58.com · 生成时间: 2026/7/5 19:09:58
+  </div>
+
+<script>
+  (function() {
+    var sortCol = -1, sortDir = 1;
+    var headers = document.querySelectorAll('#jobsTable th');
+    headers.forEach(function(th) {
+      th.addEventListener('click', function() {
+        var col = parseInt(th.dataset.col);
+        var type = th.dataset.type;
+        if (sortCol === col) {
+          sortDir = -sortDir;
+        } else {
+          sortCol = col;
+          sortDir = 1;
+        }
+        headers.forEach(function(h) { h.classList.remove('sort-asc', 'sort-desc'); });
+        th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+
+        var tbody = document.getElementById('jobsBody');
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort(function(a, b) {
+          var cellA = a.children[col];
+          var cellB = b.children[col];
+          var valA, valB;
+          if (type === 'num') {
+            valA = parseFloat(cellA.dataset.sortNum) || -1;
+            valB = parseFloat(cellB.dataset.sortNum) || -1;
+          } else {
+            valA = cellA.textContent.trim();
+            valB = cellB.textContent.trim();
+          }
+          if (valA < valB) return -1 * sortDir;
+          if (valA > valB) return 1 * sortDir;
+          return 0;
+        });
+        rows.forEach(function(r) { tbody.appendChild(r); });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

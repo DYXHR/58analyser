@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026年2月全国水泥价格走势分析报告</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --bg: #e8e8e8; --card: #fff; --primary: #1890ff; --text: #333; --text-light: #999; }
+    body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif; color: var(--text); }
+
+    .header {
+      background: var(--card);
+      padding: 16px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-left h1 { font-size: 18px; font-weight: 600; }
+    .header-left .meta { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+    .header-left .meta span { margin-right: 12px; }
+
+    .toolbar {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .toolbar button {
+      width: 36px; height: 36px; border: 1px solid #ddd; border-radius: 6px;
+      background: var(--card); cursor: pointer; font-size: 16px; color: var(--text);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .toolbar button:hover { border-color: var(--primary); color: var(--primary); }
+    .toolbar .zoom-val { font-size: 13px; color: var(--text-light); min-width: 48px; text-align: center; }
+
+    .pages-container {
+      max-width: 820px; margin: 0 auto; padding: 24px 16px 80px;
+      transition: max-width 0.2s;
+    }
+    .page-wrapper { margin-bottom: 16px; }
+    .page-img-box {
+      background: var(--card);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      border-radius: 4px; overflow: hidden;
+    }
+    .page-img-box img { width: 100%; display: block; }
+    .page-num { text-align: center; font-size: 12px; color: var(--text-light); padding: 6px 0; }
+
+    .back-link {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--primary); color: #fff; text-decoration: none;
+      padding: 8px 18px; border-radius: 20px; font-size: 13px;
+      box-shadow: 0 2px 8px rgba(24,144,255,0.4); z-index: 100;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 0.85; }
+
+    .page-nav {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.75); border-radius: 24px; padding: 8px 16px;
+      display: flex; gap: 12px; align-items: center; z-index: 100;
+    }
+    .page-nav button {
+      background: none; border: none; color: #fff; cursor: pointer;
+      font-size: 14px; padding: 4px 8px; border-radius: 4px;
+    }
+    .page-nav button:hover { background: rgba(255,255,255,0.15); }
+    .page-nav .cur { color: #fff; font-size: 13px; }
+
+    @media (max-width: 600px) {
+      .header { flex-direction: column; gap: 8px; align-items: flex-start; }
+      .pages-container { padding: 12px 8px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <h1>2026年2月全国水泥价格走势分析报告</h1>
+      <div class="meta">
+        <span>分类: 水泥</span>
+        <span>共 6 页</span>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button onclick="zoom(-0.1)" title="缩小">−</button>
+      <span class="zoom-val" id="zoomVal">100%</span>
+      <button onclick="zoom(0.1)" title="放大">+</button>
+      <button onclick="resetZoom()" title="重置">↺</button>
+    </div>
+  </div>
+
+  <div class="pages-container" id="pagesContainer">
+    
+      <div class="page-wrapper" id="page-1">
+        <div class="page-img-box">
+          <img src="pages/page-1.png" alt="第1页" loading="eager" />
+        </div>
+        <div class="page-num">第 1 / 6 页</div>
+      </div>
+      <div class="page-wrapper" id="page-2">
+        <div class="page-img-box">
+          <img src="pages/page-2.png" alt="第2页" loading="eager" />
+        </div>
+        <div class="page-num">第 2 / 6 页</div>
+      </div>
+      <div class="page-wrapper" id="page-3">
+        <div class="page-img-box">
+          <img src="pages/page-3.png" alt="第3页" loading="lazy" />
+        </div>
+        <div class="page-num">第 3 / 6 页</div>
+      </div>
+      <div class="page-wrapper" id="page-4">
+        <div class="page-img-box">
+          <img src="pages/page-4.png" alt="第4页" loading="lazy" />
+        </div>
+        <div class="page-num">第 4 / 6 页</div>
+      </div>
+      <div class="page-wrapper" id="page-5">
+        <div class="page-img-box">
+          <img src="pages/page-5.png" alt="第5页" loading="lazy" />
+        </div>
+        <div class="page-num">第 5 / 6 页</div>
+      </div>
+      <div class="page-wrapper" id="page-6">
+        <div class="page-img-box">
+          <img src="pages/page-6.png" alt="第6页" loading="lazy" />
+        </div>
+        <div class="page-num">第 6 / 6 页</div>
+      </div>
+  </div>
+
+  <div class="page-nav">
+    <button onclick="scrollToPage(-1)">‹ 上页</button>
+    <span class="cur" id="curPage">1 / 6</span>
+    <button onclick="scrollToPage(1)">下页 ›</button>
+  </div>
+
+  <a href="../../index.html" class="back-link">← 返回目录</a>
+
+  <script>
+    let zoomLevel = 1;
+    const baseWidth = 820;
+    let currentPage = 1;
+    const totalPages = 6;
+
+    function zoom(delta) {
+      zoomLevel = Math.max(0.4, Math.min(3, Math.round((zoomLevel + delta) * 100) / 100));
+      document.getElementById('pagesContainer').style.maxWidth = (baseWidth * zoomLevel) + 'px';
+      document.getElementById('zoomVal').textContent = Math.round(zoomLevel * 100) + '%';
+    }
+    function resetZoom() {
+      zoomLevel = 1;
+      document.getElementById('pagesContainer').style.maxWidth = baseWidth + 'px';
+      document.getElementById('zoomVal').textContent = '100%';
+    }
+    function scrollToPage(dir) {
+      currentPage = Math.max(1, Math.min(totalPages, currentPage + dir));
+      const el = document.getElementById('page-' + currentPage);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('curPage').textContent = currentPage + ' / ' + totalPages;
+    }
+    // 滚动时自动更新当前页码
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const m = e.target.id.match(/page-(\d+)/);
+          if (m) {
+            currentPage = parseInt(m[1]);
+            document.getElementById('curPage').textContent = currentPage + ' / ' + totalPages;
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.page-wrapper').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

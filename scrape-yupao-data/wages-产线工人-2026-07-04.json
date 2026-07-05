@@ -1,0 +1,265 @@
+{
+  "keyword": "产线工人",
+  "city": null,
+  "scrapeDate": "2026-07-04",
+  "totalJobs": 8,
+  "jobs": [
+    {
+      "title": "生产线工人",
+      "salaryRaw": "6000-7000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 7000,
+        "raw": "6000-7000元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 26.923076923076923
+      },
+      "hourlyWageDisplay": "23.1-26.9元/小时",
+      "company": "益源盛达管道科技（河北）有限公司",
+      "contact": "李先生",
+      "city": "石家庄",
+      "district": "辛集市",
+      "fullLocation": "石家庄 辛集市",
+      "date": "2026年07月04日 09:46",
+      "tags": [
+        "普工",
+        "6-10人",
+        "月结"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/215733349.html",
+      "activity": "昨日活跃"
+    },
+    {
+      "title": "两班倒工人20名（派遣编制，待遇7000-10000）",
+      "salaryRaw": "7000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 7000,
+        "max": 8000,
+        "raw": "7000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 26.923076923076923,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "26.9-30.8元/小时",
+      "company": "湖南奇士人力资源服务有限公司",
+      "contact": "王女士",
+      "city": "唐山",
+      "district": "丰南区",
+      "fullLocation": "唐山 丰南区",
+      "date": "2026年07月04日 09:35",
+      "tags": [
+        "贴标签",
+        "车间",
+        "包吃",
+        "保险",
+        "加班补贴",
+        "五险",
+        "包住",
+        "11-20人",
+        "月结"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/201791476.html",
+      "activity": "昨日活跃"
+    },
+    {
+      "title": "6k-8k招聘金属钣金类的生产跟单员",
+      "salaryRaw": "",
+      "salaryParsed": {
+        "type": "unknown",
+        "min": null,
+        "max": null,
+        "raw": ""
+      },
+      "hourlyWage": {
+        "min": null,
+        "max": null
+      },
+      "hourlyWageDisplay": "-",
+      "company": "福建鑫创兴晟制造有限公司",
+      "contact": "郭女士",
+      "city": "福州",
+      "district": "闽侯县",
+      "fullLocation": "福州 闽侯县",
+      "date": "",
+      "tags": [
+        "生产跟单"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/170368879.html",
+      "activity": ""
+    },
+    {
+      "title": "南通崇川区钣金厂车间主任（5年以上工作经验，薪资待遇面议）",
+      "salaryRaw": "1.5-2万元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 15000,
+        "max": 20000,
+        "raw": "15000-20000元/月"
+      },
+      "hourlyWage": {
+        "min": 57.69230769230769,
+        "max": 76.92307692307692
+      },
+      "hourlyWageDisplay": "57.7-76.9元/小时",
+      "company": "祥能",
+      "contact": "贾女士",
+      "city": "南通",
+      "district": "崇川区",
+      "fullLocation": "南通 崇川区",
+      "date": "",
+      "tags": [
+        "车间主任",
+        "1-2人",
+        "月结",
+        "5-10年",
+        "中专/中技",
+        "全职",
+        "熟练钣金加工工艺",
+        "有生产管理经验",
+        "机电设备经验",
+        "钣金工艺经验",
+        "机械加工制造经验",
+        "质量管理经验",
+        "精益改善经验"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/163504986.html",
+      "activity": "昨日活跃"
+    },
+    {
+      "title": "生产组长",
+      "salaryRaw": "5000-8000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 5000,
+        "max": 8000,
+        "raw": "5000-8000元/月"
+      },
+      "hourlyWage": {
+        "min": 19.23076923076923,
+        "max": 30.76923076923077
+      },
+      "hourlyWageDisplay": "19.2-30.8元/小时",
+      "company": "江苏果鲜萃生物科技",
+      "contact": "夏女士",
+      "city": "宿迁",
+      "district": "宿豫区",
+      "fullLocation": "宿迁 宿豫区",
+      "date": "",
+      "tags": [
+        "生产组长/拉长",
+        "1-3年",
+        "学历不限"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/198947143.html",
+      "activity": ""
+    },
+    {
+      "title": "车间主任",
+      "salaryRaw": "1.2-1.5万元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 12000,
+        "max": 15000,
+        "raw": "12000-15000元/月"
+      },
+      "hourlyWage": {
+        "min": 46.15384615384615,
+        "max": 57.69230769230769
+      },
+      "hourlyWageDisplay": "46.2-57.7元/小时",
+      "company": "新疆绿斯特能源有限公司",
+      "contact": "邓女士",
+      "city": "哈密",
+      "district": "伊吾县",
+      "fullLocation": "哈密 伊吾县",
+      "date": "",
+      "tags": [
+        "车间主任",
+        "包吃",
+        "免费培训",
+        "包住",
+        "1-2人",
+        "月结",
+        "3-5年",
+        "大专",
+        "全职",
+        "有生产管理经验",
+        "能源/环保/化工经验",
+        "质量管理经验",
+        "精益改善经验",
+        "AutoCAD"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/17122072.html",
+      "activity": ""
+    },
+    {
+      "title": "机械下料车间主管",
+      "salaryRaw": "9000-12000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 9000,
+        "max": 12000,
+        "raw": "9000-12000元/月"
+      },
+      "hourlyWage": {
+        "min": 34.61538461538461,
+        "max": 46.15384615384615
+      },
+      "hourlyWageDisplay": "34.6-46.2元/小时",
+      "company": "徐州市茗尧机械制造有限公司",
+      "contact": "张女士",
+      "city": "徐州",
+      "district": "铜山区",
+      "fullLocation": "徐州 铜山区",
+      "date": "",
+      "tags": [
+        "主管",
+        "1-3年",
+        "大专",
+        "有生产管理经验",
+        "成型工艺经验",
+        "机加工工艺经验",
+        "机械加工制造经验",
+        "精益改善经验"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/70128461.html",
+      "activity": ""
+    },
+    {
+      "title": "招聘主管（工厂用工需求）",
+      "salaryRaw": "6000-10000元/月",
+      "salaryParsed": {
+        "type": "monthly",
+        "min": 6000,
+        "max": 10000,
+        "raw": "6000-10000元/月"
+      },
+      "hourlyWage": {
+        "min": 23.076923076923077,
+        "max": 38.46153846153846
+      },
+      "hourlyWageDisplay": "23.1-38.5元/小时",
+      "company": "辽宁昊明食品",
+      "contact": "于女士",
+      "city": "鞍山",
+      "district": "",
+      "fullLocation": "鞍山",
+      "date": "",
+      "tags": [
+        "厂长/主管",
+        "1-3年",
+        "大专",
+        "蓝领岗位招聘",
+        "职能岗位招聘",
+        "技术岗位招聘"
+      ],
+      "companyUrl": "http://m.yupao.com/qiye/173134308.html",
+      "activity": ""
+    }
+  ]
+}
