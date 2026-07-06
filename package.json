@@ -10,6 +10,7 @@
     "batch": "node scrape-yupao.js --batch",
     "scrape58": "node scrape-58.js",
     "batch58": "node scrape-58.js --batch",
+    "shenzhen": "node report-shenzhen.js",
     "serve": "python -m http.server 8080 --directory html-output"
   },
   "dependencies": {
