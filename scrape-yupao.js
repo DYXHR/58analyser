@@ -34,6 +34,23 @@ const DEFAULT_KEYWORDS = [
   '统计员', '保全工', '帮工', '小工', '切割工',
 ];
 
+// 按城市搜索模式：城市定义（areaId 来自鱼泡网地区树 localStorage.CACHE_AREA_DATA）
+// type: 'hot' = 热门城市可直接点；'province' = 需省份下钻到该城市
+const CITY_DEFS = {
+  '深圳': { id: 77, type: 'hot' },
+  '南京': { id: 220, type: 'hot' },
+  '西安': { id: 311, type: 'hot' },
+  '河源': { id: 81, type: 'province', province: '广东' },
+  '长沙': { id: 197, type: 'hot' },
+};
+const DEFAULT_CITIES = Object.keys(CITY_DEFS);
+// 按城市模式的精简关键词（12 个核心产线岗位，控制运行时长）
+const CITY_KEYWORDS = [
+  '产线工人', '普工', '操作工', '流水线工人', '装配工',
+  '包装工', '分拣员', '质检员', '车间工人', '检验员',
+  '叉车工', '焊工',
+];
+
 // ============================================================
 // 命令行参数解析
 // ============================================================
@@ -46,6 +63,8 @@ function parseArgs() {
     batch: false,
     keywords: null,       // 自定义关键词列表（逗号分隔）
     delay: 5,             // 批量模式关键词间延迟（秒）
+    cities: null,         // 按城市搜索模式：逗号分隔城市列表
+    cityKeywords: null,   // 按城市模式自定义关键词
   };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -62,6 +81,11 @@ function parseArgs() {
       config.keywords = args[++i];
     } else if (arg === '--delay' || arg === '-d') {
       config.delay = parseInt(args[++i], 10) || 5;
+    } else if (arg === '--cities') {
+      config.cities = args[++i] || DEFAULT_CITIES.join(',');
+      if (config.maxPages === 3) config.maxPages = 12; // 按城市模式默认12轮
+    } else if (arg === '--city-keywords') {
+      config.cityKeywords = args[++i];
     } else if (arg === '--help' || arg === '-h') {
       console.log(`用法: node scrape-yupao.js [选项]
 
@@ -77,10 +101,17 @@ function parseArgs() {
   --delay, -d <秒>        关键词间延迟秒数 (默认: 5)
   --city, -c <城市>       按城市本地过滤 (可选)
 
+按城市搜索模式（针对指定城市主动搜索，扩量）:
+  --cities <列表>         逗号分隔城市 (默认: 深圳,南京,西安,河源,长沙)
+  --city-keywords <列表>  自定义关键词 (默认 12 个核心词)
+  --max-pages, -m <次数>  每词滚动加载次数 (默认: 12)
+
 示例:
   node scrape-yupao.js --batch
   node scrape-yupao.js --batch --max-pages 20 --delay 8
-  node scrape-yupao.js --batch --keywords "普工,操作工" --city 深圳`);
+  node scrape-yupao.js --batch --keywords "普工,操作工" --city 深圳
+  node scrape-yupao.js --cities                          # 默认5城市×12词
+  node scrape-yupao.js --cities "深圳,南京" -m 15`);
       process.exit(0);
     }
   }
@@ -1152,6 +1183,231 @@ td a { color: #1a73e8; text-decoration: none; } td a:hover { text-decoration: un
 }
 
 // ============================================================
+// 按城市搜索模式：城市选择器交互 + 搜索框就地换关键词
+// 机制（已验证）：选中城市后，用搜索框就地换关键词可保留城市筛选；
+// 而 page.goto 全量导航会丢失城市筛选。故每城市选一次，后续词用搜索框。
+// ============================================================
+
+// 打开城市选择器弹层（点击前先检查状态避免 toggle 关闭；多角度点击重试）
+async function openCityPicker(page) {
+  await page.waitForSelector('[class*="filter-picker-item"]', { timeout: 15000 });
+  for (let i = 0; i < 6; i++) {
+    // 若弹层已打开，直接返回（避免误点击 toggle 关闭）
+    const visible = await page
+      .locator('[class*="picker-popup-body"]')
+      .first()
+      .isVisible()
+      .catch(() => false);
+    if (visible) {
+      await page.waitForTimeout(800);
+      return;
+    }
+    // 优先点含「全国」的地区筛选器，失败则点首个 filter-picker-item
+    const areaItem = page
+      .locator('[class*="filter-picker-item"]')
+      .filter({ hasText: '全国' })
+      .first();
+    const exists = await areaItem.count().catch(() => 0);
+    if (exists > 0) {
+      await areaItem.click({ timeout: 5000 }).catch(() => {});
+    } else {
+      await page
+        .locator('[class*="filter-picker-item"]')
+        .first()
+        .click({ timeout: 5000 })
+        .catch(() => {});
+    }
+    await page.waitForTimeout(1500);
+  }
+  throw new Error('城市选择器弹层未能打开');
+}
+
+// 读取当前筛选器显示的城市文本（#filter_picker_sort）
+async function getFilterCity(page) {
+  return await page.evaluate(() => {
+    const el = document.querySelector('#filter_picker_sort');
+    return el ? el.innerText.trim() : '';
+  });
+}
+
+// 选城市：热门城市直接点；河源等走省份下钻。带 3 次重试。
+// @returns {Promise<boolean>} 是否选中（filterText 变为城市名）
+async function selectCity(page, city) {
+  const def = CITY_DEFS[city];
+  if (!def) throw new Error(`未知城市: ${city}`);
+
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      await openCityPicker(page);
+      const body = page.locator('[class*="picker-popup-body"]');
+      if (def.type === 'hot') {
+        await body.getByText(city, { exact: true }).first().click();
+      } else {
+        // 省份下钻：点省份 → 等城市项出现 → 点城市
+        await body.getByText(def.province, { exact: true }).first().click();
+        await page.waitForTimeout(1200);
+        const cityLocator = body.getByText(city, { exact: true }).first();
+        await cityLocator.waitFor({ state: 'visible', timeout: 5000 });
+        await cityLocator.click();
+      }
+      await page.waitForTimeout(2500);
+      const got = await getFilterCity(page);
+      if (got === city) return true;
+      console.log(`  选城市[${city}]第${attempt}次未命中(filterText="${got}")，重试`);
+      await page.mouse.click(10, 400).catch(() => {}); // 点空白关闭残留弹层
+      await page.waitForTimeout(800);
+    } catch (e) {
+      console.log(`  选城市[${city}]第${attempt}次异常: ${e.message}`);
+      await page.mouse.click(10, 400).catch(() => {});
+      await page.waitForTimeout(800);
+    }
+  }
+  return false;
+}
+
+// 搜索框就地换关键词（保留城市筛选，不走 page.goto）
+async function searchInPlace(page, keyword) {
+  await page.locator('input[type="text"]').first().fill(keyword);
+  await page.waitForTimeout(300);
+  await page
+    .locator('[class*="search-input-button"]')
+    .first()
+    .click()
+    .catch(async () => {
+      await page.keyboard.press('Enter');
+    });
+  await page.waitForTimeout(2500);
+  await handleVerificationPage(page);
+  try {
+    await page.waitForSelector('[class*="card___"]', { timeout: 30000 });
+  } catch {}
+}
+
+// 处理单条岗位：薪资换算 + 时薪显示（标注目标城市）
+function processCityJob(raw, city, keyword) {
+  const processedSalary = preprocessSalary(raw.salaryRaw);
+  const salaryParsed = parseWage(processedSalary);
+  const hourlyWage = toHourlyWage(salaryParsed);
+  const hourlyWageDisplay = (() => {
+    const { min, max } = hourlyWage;
+    if (min === null && max === null) return '-';
+    if (min !== null && max !== null && min !== max) return `${min.toFixed(1)}-${max.toFixed(1)}元/小时`;
+    const val = min !== null ? min : max;
+    return `${val.toFixed(1)}元/小时`;
+  })();
+  return {
+    title: raw.title,
+    salaryRaw: raw.salaryRaw,
+    salaryParsed,
+    hourlyWage,
+    hourlyWageDisplay,
+    company: raw.company,
+    contact: raw.contact,
+    city, // ★ 显式标注目标城市（过滤后地址栏可能只剩区名）
+    district: raw.district,
+    fullLocation: raw.fullLocation,
+    date: raw.date,
+    tags: raw.tags,
+    companyUrl: raw.companyUrl,
+    activity: raw.activity,
+    searchKeyword: keyword,
+  };
+}
+
+// 爬取单个城市：选城市一次 + 搜索框就地换关键词滚动加载
+async function scrapeCity(context, city, keywords, maxPages) {
+  const page = await context.newPage();
+  page.setDefaultTimeout(60000);
+  const cityJobs = [];
+  const seen = new Set();
+
+  try {
+    // 首个关键词：完整导航
+    await page.goto('https://m.yupao.com/', { waitUntil: 'commit', timeout: 60000 });
+    await page.waitForTimeout(1500);
+    await page.goto(
+      `https://m.yupao.com/topic/a1?keywords=${encodeURIComponent(keywords[0])}`,
+      { waitUntil: 'commit', timeout: 60000 }
+    );
+    await handleVerificationPage(page);
+    await page.waitForSelector('[class*="card___"]', { timeout: 45000 });
+
+    // 选城市（一次）
+    const selected = await selectCity(page, city);
+    if (!selected) {
+      console.log(`  ⚠ 城市[${city}]选择失败，跳过该城市`);
+      return cityJobs;
+    }
+    console.log(`  ✓ 已选城市: ${city}`);
+
+    for (let ki = 0; ki < keywords.length; ki++) {
+      const kw = keywords[ki];
+      if (ki > 0) {
+        console.log(`  [${ki + 1}/${keywords.length}] 就地搜索: ${kw}`);
+        await searchInPlace(page, kw);
+        // 校验城市是否保留，丢失则重选
+        if ((await getFilterCity(page)) !== city) {
+          console.log(`  城市筛选丢失，重新选择 ${city}`);
+          await selectCity(page, city);
+        }
+      } else {
+        console.log(`  [1/${keywords.length}] 关键词: ${kw} (已加载)`);
+      }
+
+      // 提取 + 滚动加载
+      let rawJobs = await extractRawJobs(page);
+      let prev = rawJobs.length;
+      for (let round = 2; round <= maxPages; round++) {
+        await swipeUpToLoadMore(page);
+        rawJobs = await extractRawJobs(page);
+        if (rawJobs.length === prev) {
+          await page.waitForTimeout(1200);
+          if (!(await hasLoadMore(page))) break;
+          await swipeUpToLoadMore(page);
+          rawJobs = await extractRawJobs(page);
+          if (rawJobs.length === prev) break;
+        }
+        prev = rawJobs.length;
+      }
+
+      // 去重 + 标注城市
+      let newCount = 0;
+      for (const raw of rawJobs) {
+        const key = `${raw.title}|${raw.company}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        cityJobs.push(processCityJob(raw, city, kw));
+        newCount++;
+      }
+      console.log(`     ${kw}: ${rawJobs.length}条 → 新增${newCount}条 (城市累计${cityJobs.length})`);
+    }
+  } catch (e) {
+    console.warn(`  爬取城市[${city}]出错(已有${cityJobs.length}条): ${e.message}`);
+  } finally {
+    await page.close();
+  }
+  return cityJobs;
+}
+
+// 按城市批量 JSON 输出
+function generateCitiesBatchJSON(allJobs, cities, keywords, outputDir) {
+  const today = new Date();
+  const dateStr = today.toISOString().slice(0, 10);
+  const filename = `wages-cities-batch-${dateStr}.json`;
+  const filepath = path.join(outputDir, filename);
+  const data = {
+    cities,
+    keywords,
+    scrapeDate: dateStr,
+    totalJobs: allJobs.length,
+    jobs: allJobs,
+  };
+  fs.writeFileSync(filepath, JSON.stringify(data, null, 2), 'utf-8');
+  console.log(`✓ 按城市批量JSON已保存: ${filepath} (${allJobs.length} 条)`);
+  return filepath;
+}
+
+// ============================================================
 // 主函数
 // ============================================================
 async function main() {
@@ -1171,6 +1427,86 @@ async function main() {
 
   const outputDir = path.join(__dirname, 'scrape-yupao-data');
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+  // ===================== 按城市搜索模式 =====================
+  if (config.cities) {
+    const cities = config.cities
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+    const keywords = config.cityKeywords
+      ? config.cityKeywords.split(',').map((s) => s.trim()).filter(Boolean)
+      : CITY_KEYWORDS;
+
+    console.log('========================================');
+    console.log('  鱼泡网按城市搜索扩量');
+    console.log('========================================');
+    console.log(`  城市(${cities.length}): ${cities.join(', ')}`);
+    console.log(`  关键词(${keywords.length}): ${keywords.join(', ')}`);
+    console.log(`  每词滚动: ${config.maxPages} 轮`);
+    console.log('========================================\n');
+
+    // 断点续跑：加载今日已完成的批量文件，跳过已完成城市
+    const today0 = new Date();
+    const dateStr0 = today0.toISOString().slice(0, 10);
+    const batchFile = path.join(outputDir, `wages-cities-batch-${dateStr0}.json`);
+    let allJobs = [];
+    const doneCities = new Set();
+    if (fs.existsSync(batchFile)) {
+      try {
+        const prev = JSON.parse(fs.readFileSync(batchFile, 'utf-8'));
+        if (Array.isArray(prev.jobs)) {
+          allJobs = prev.jobs;
+          for (const j of allJobs) if (j.city) doneCities.add(j.city);
+          console.log(`  断点续跑: 已加载 ${allJobs.length} 条，已完成城市: ${[...doneCities].join(', ') || '无'}\n`);
+        }
+      } catch (e) {
+        console.log(`  读取历史文件失败，从头开始: ${e.message}\n`);
+      }
+    }
+
+    const remaining = cities.filter((c) => !doneCities.has(c));
+    if (remaining.length === 0) {
+      console.log('  所有城市已完成，无需重跑。');
+    } else {
+      console.log(`  待爬城市(${remaining.length}): ${remaining.join(', ')}\n`);
+      const { browser, context } = await createBrowser();
+      try {
+        for (let ci = 0; ci < remaining.length; ci++) {
+          const city = remaining[ci];
+          console.log(`\n[${ci + 1}/${remaining.length}] 城市: ${city}`);
+          console.log('----------------------------------------');
+          // 整城市级重试：选城市可能概率性失败，换新页面重来（最多 3 次）
+          let jobs = [];
+          for (let attempt = 1; attempt <= 3 && jobs.length === 0; attempt++) {
+            if (attempt > 1) console.log(`  ${city} 无数据，第 ${attempt} 次重试（新页面重选城市）...`);
+            jobs = await scrapeCity(context, city, keywords, config.maxPages);
+          }
+          console.log(`  ${city} 合计: ${jobs.length} 条`);
+          allJobs.push(...jobs);
+          generateCitiesBatchJSON(allJobs, cities, keywords, outputDir); // 增量保存
+          if (ci < remaining.length - 1) {
+            const d = 3 + Math.random() * 2;
+            console.log(`  等待 ${d.toFixed(1)} 秒...`);
+            await new Promise((r) => setTimeout(r, d * 1000));
+          }
+        }
+      } finally {
+        await browser.close();
+      }
+    }
+
+    console.log('\n========================================');
+    console.log(`  按城市搜索完成，总 ${allJobs.length} 条`);
+    const cm = {};
+    for (const j of allJobs) cm[j.city] = (cm[j.city] || 0) + 1;
+    Object.entries(cm).forEach(([c, n]) => console.log(`    ${c}: ${n}条`));
+    console.log('========================================\n');
+
+    generateCitiesBatchJSON(allJobs, cities, keywords, outputDir);
+    console.log('✓ 完成！可用 `npm run cities` 生成多城市报告');
+    return;
+  }
 
   // ===================== 批量模式 =====================
   if (config.batch) {

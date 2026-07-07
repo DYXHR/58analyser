@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳产线工人时薪报告 · 鱼泡网 · 2026-07-07</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #0d47a1, #1a73e8); color: #fff; padding: 36px 24px; text-align: center; }
+  .header h1 { font-size: 26px; margin-bottom: 10px; }
+  .header .meta { font-size: 14px; opacity: 0.9; }
+  .header .meta span { margin: 0 14px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: #fff; border-radius: 12px; padding: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .stat-label { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .stat-value { font-size: 26px; font-weight: 700; color: #1a73e8; }
+  .stat-value.low { color: #e65100; }
+  .stat-value.high { color: #2e7d32; }
+  .stat-sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; padding-left: 12px; border-left: 4px solid #1a73e8; }
+  .section-title .hint { font-size: 12px; color: #999; font-weight: 400; margin-left: 8px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; position: sticky; top: 0; background: #f5f7fa; padding: 10px 0; z-index: 10; }
+  .tab-btn { padding: 8px 20px; border: 1px solid #d0d7e2; background: #fff; border-radius: 20px; cursor: pointer; font-size: 14px; color: #555; transition: all 0.15s; }
+  .tab-btn:hover { border-color: #1a73e8; color: #1a73e8; }
+  .tab-btn.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+  .city-panel { }
+
+  .hist-chart { display: flex; align-items: flex-end; gap: 12px; background: #fff; border-radius: 12px; padding: 24px 20px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); height: 280px; }
+  .hist-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+  .hist-count { font-size: 13px; font-weight: 600; color: #1a73e8; margin-bottom: 4px; }
+  .hist-bar { width: 70%; background: linear-gradient(180deg, #4fc3f7, #1a73e8); border-radius: 6px 6px 0 0; min-height: 2px; transition: height 0.3s; }
+  .hist-label { font-size: 12px; color: #666; margin-top: 8px; white-space: nowrap; }
+  .hist-pct { font-size: 11px; color: #aaa; }
+
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-size: 13px; }
+  thead { background: #f0f4ff; }
+  th { padding: 12px 14px; text-align: left; font-weight: 600; color: #555; cursor: pointer; user-select: none; white-space: nowrap; transition: background 0.15s; }
+  th:hover { background: #e3eaff; }
+  th.sort-asc::after { content: " ▲"; font-size: 11px; color: #1a73e8; }
+  th.sort-desc::after { content: " ▼"; font-size: 11px; color: #1a73e8; }
+  td { padding: 9px 14px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tbody tr:hover { background: #f8faff; }
+  tbody tr:nth-child(even) { background: #fcfcfe; }
+  tbody tr:nth-child(even):hover { background: #f8faff; }
+  .city-name { font-weight: 600; }
+  .wage-cell { font-weight: 600; color: #1a73e8; white-space: nowrap; }
+  .bar-cell { width: 160px; }
+  .bar { height: 18px; background: linear-gradient(90deg, #4fc3f7, #1a73e8); border-radius: 4px; min-width: 2px; }
+  .bar.kw { background: linear-gradient(90deg, #ffb74d, #e65100); }
+  .bar.type { background: linear-gradient(90deg, #81c784, #2e7d32); }
+  .tag { display: inline-block; background: #e8f0fe; color: #1a73e8; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin: 1px; white-space: nowrap; }
+  td a { color: #1a73e8; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .table-wrapper { overflow-x: auto; }
+  .table-scroll { max-height: 720px; overflow-y: auto; }
+
+  .dual-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .dual-grid { grid-template-columns: 1fr; } }
+
+  .welfare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .welfare-grid { grid-template-columns: 1fr; } }
+  .welfare-item { margin-bottom: 12px; }
+  .welfare-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+  .welfare-name { font-weight: 600; color: #444; }
+  .welfare-pct { color: #1a73e8; font-weight: 600; }
+  .welfare-pct em { color: #aaa; font-style: normal; font-weight: 400; }
+  .welfare-track { background: #eef2f7; border-radius: 4px; height: 12px; overflow: hidden; }
+  .welfare-fill { height: 100%; background: linear-gradient(90deg, #4fc3f7, #1a73e8); border-radius: 4px; }
+  .welfare-fill.settle { background: linear-gradient(90deg, #ffb74d, #e65100); }
+
+  .filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 13px; color: #666; }
+  .filter-bar select { padding: 6px 10px; border: 1px solid #d0d7e2; border-radius: 6px; font-size: 13px; background: #fff; }
+  .footer { text-align: center; padding: 24px; color: #aaa; font-size: 13px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>深圳产线工人时薪报告</h1>
+    <div class="meta">
+      <span>数据来源: 鱼泡网 m.yupao.com</span>
+      <span>抓取日期: 2026-07-05</span>
+      <span>城市: 深圳</span><span>样本: 198 条（有效时薪 181 条）</span>
+      <span>生成: 2026-07-07</span>
+    </div>
+  </div>
+
+  <div class="container">
+    
+        <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">有效样本</div><div class="stat-value">181</div><div class="stat-sub">共 198 条岗位</div></div>
+      <div class="stat-card"><div class="stat-label">时薪中位数</div><div class="stat-value">28.8 元/时</div><div class="stat-sub">50% 分位</div></div>
+      <div class="stat-card"><div class="stat-label">时薪均值</div><div class="stat-value">29.9 元/时</div><div class="stat-sub">全国均值 27.4</div></div>
+      <div class="stat-card"><div class="stat-label">主要区间</div><div class="stat-value" style="font-size:20px">25.0 ~ 34.6</div><div class="stat-sub">P25 ~ P75（中间 50%）</div></div>
+      <div class="stat-card"><div class="stat-label">最低时薪</div><div class="stat-value low">17.3 元/时</div><div class="stat-sub">P10: 21.2</div></div>
+      <div class="stat-card"><div class="stat-label">最高时薪</div><div class="stat-value high">65.4 元/时</div><div class="stat-sub">P90: 40.4</div></div></div>
+
+        <div class="section">
+          <div class="section-title">深圳时薪分布<span class="hint">按换算后的时薪中点分桶（元/时）</span></div>
+          <div class="hist-chart">
+        <div class="hist-col">
+          <div class="hist-count">10</div>
+          <div class="hist-bar" style="height:12.35%"></div>
+          <div class="hist-label">&lt;20</div>
+          <div class="hist-pct">6%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">21</div>
+          <div class="hist-bar" style="height:25.93%"></div>
+          <div class="hist-label">20-25</div>
+          <div class="hist-pct">12%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">81</div>
+          <div class="hist-bar" style="height:100.00%"></div>
+          <div class="hist-label">25-30</div>
+          <div class="hist-pct">45%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">30</div>
+          <div class="hist-bar" style="height:37.04%"></div>
+          <div class="hist-label">30-35</div>
+          <div class="hist-pct">17%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">18</div>
+          <div class="hist-bar" style="height:22.22%"></div>
+          <div class="hist-label">35-40</div>
+          <div class="hist-pct">10%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">19</div>
+          <div class="hist-bar" style="height:23.46%"></div>
+          <div class="hist-label">40-50</div>
+          <div class="hist-pct">10%</div>
+        </div>
+        <div class="hist-col">
+          <div class="hist-count">2</div>
+          <div class="hist-bar" style="height:2.47%"></div>
+          <div class="hist-label">50+</div>
+          <div class="hist-pct">1%</div>
+        </div></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">深圳各行政区时薪对比<span class="hint">区名已归一化</span></div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>行政区</th><th>岗位数</th><th>有效</th><th>均时薪</th><th>中位数</th><th>范围</th><th>占比</th></tr></thead>
+              <tbody>
+        <tr>
+          <td class="city-name">坪山区</td>
+          <td>15</td>
+          <td>15</td>
+          <td class="wage-cell">35.5</td>
+          <td>36.5</td>
+          <td>19.2~48.1</td>
+          <td class="bar-cell"><div class="bar" style="width:100.00%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">宝安区</td>
+          <td>54</td>
+          <td>51</td>
+          <td class="wage-cell">31.2</td>
+          <td>28.8</td>
+          <td>17.3~65.4</td>
+          <td class="bar-cell"><div class="bar" style="width:87.85%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">罗湖区</td>
+          <td>7</td>
+          <td>4</td>
+          <td class="wage-cell">30.9</td>
+          <td>31.0</td>
+          <td>25.0~36.5</td>
+          <td class="bar-cell"><div class="bar" style="width:86.91%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">龙华区</td>
+          <td>29</td>
+          <td>29</td>
+          <td class="wage-cell">30.5</td>
+          <td>28.8</td>
+          <td>21.2~48.1</td>
+          <td class="bar-cell"><div class="bar" style="width:85.80%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">福田区</td>
+          <td>9</td>
+          <td>8</td>
+          <td class="wage-cell">29.8</td>
+          <td>26.9</td>
+          <td>19.0~46.2</td>
+          <td class="bar-cell"><div class="bar" style="width:83.99%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">南山区</td>
+          <td>10</td>
+          <td>10</td>
+          <td class="wage-cell">28.8</td>
+          <td>28.8</td>
+          <td>19.2~40.0</td>
+          <td class="bar-cell"><div class="bar" style="width:81.23%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">光明区</td>
+          <td>13</td>
+          <td>11</td>
+          <td class="wage-cell">28.7</td>
+          <td>26.9</td>
+          <td>23.1~38.5</td>
+          <td class="bar-cell"><div class="bar" style="width:80.93%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">其他/未知</td>
+          <td>10</td>
+          <td>3</td>
+          <td class="wage-cell">27.8</td>
+          <td>25.0</td>
+          <td>20.0~38.5</td>
+          <td class="bar-cell"><div class="bar" style="width:78.34%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">龙岗区</td>
+          <td>50</td>
+          <td>49</td>
+          <td class="wage-cell">27.2</td>
+          <td>26.9</td>
+          <td>17.3~38.5</td>
+          <td class="bar-cell"><div class="bar" style="width:76.65%"></div></td>
+        </tr>
+        <tr>
+          <td class="city-name">大鹏新区</td>
+          <td>1</td>
+          <td>1</td>
+          <td class="wage-cell">25.0</td>
+          <td>25.0</td>
+          <td>25.0~25.0</td>
+          <td class="bar-cell"><div class="bar" style="width:70.40%"></div></td>
+        </tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="dual-grid">
+          <div class="section">
+            <div class="section-title">各工种（来源关键词）时薪</div>
+            <div class="table-wrapper"><table>
+              <thead><tr><th>工种</th><th>岗位数</th><th>均时薪</th><th>中位数</th><th>占比</th></tr></thead>
+              <tbody>
+        <tr>
+          <td>调机员</td>
+          <td>25</td>
+          <td class="wage-cell">38.5</td>
+          <td>36.5</td>
+          <td class="bar-cell"><div class="bar kw" style="width:100.00%"></div></td>
+        </tr>
+        <tr>
+          <td>品管员</td>
+          <td>19</td>
+          <td class="wage-cell">26.7</td>
+          <td>25.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:76.00%"></div></td>
+        </tr>
+        <tr>
+          <td>物料员</td>
+          <td>17</td>
+          <td class="wage-cell">27.3</td>
+          <td>26.9</td>
+          <td class="bar-cell"><div class="bar kw" style="width:68.00%"></div></td>
+        </tr>
+        <tr>
+          <td>包装工</td>
+          <td>16</td>
+          <td class="wage-cell">26.1</td>
+          <td>25.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:64.00%"></div></td>
+        </tr>
+        <tr>
+          <td>分拣员</td>
+          <td>13</td>
+          <td class="wage-cell">33.2</td>
+          <td>33.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:52.00%"></div></td>
+        </tr>
+        <tr>
+          <td>检验员</td>
+          <td>11</td>
+          <td class="wage-cell">26.2</td>
+          <td>26.9</td>
+          <td class="bar-cell"><div class="bar kw" style="width:44.00%"></div></td>
+        </tr>
+        <tr>
+          <td>操作工</td>
+          <td>10</td>
+          <td class="wage-cell">27.9</td>
+          <td>28.8</td>
+          <td class="bar-cell"><div class="bar kw" style="width:40.00%"></div></td>
+        </tr>
+        <tr>
+          <td>小工</td>
+          <td>9</td>
+          <td class="wage-cell">32.7</td>
+          <td>31.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:36.00%"></div></td>
+        </tr>
+        <tr>
+          <td>电工</td>
+          <td>8</td>
+          <td class="wage-cell">32.0</td>
+          <td>32.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:32.00%"></div></td>
+        </tr>
+        <tr>
+          <td>杂工</td>
+          <td>8</td>
+          <td class="wage-cell">26.6</td>
+          <td>25.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:32.00%"></div></td>
+        </tr>
+        <tr>
+          <td>帮工</td>
+          <td>7</td>
+          <td class="wage-cell">25.1</td>
+          <td>20.6</td>
+          <td class="bar-cell"><div class="bar kw" style="width:28.00%"></div></td>
+        </tr>
+        <tr>
+          <td>装配工</td>
+          <td>5</td>
+          <td class="wage-cell">33.7</td>
+          <td>33.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>质检员</td>
+          <td>5</td>
+          <td class="wage-cell">27.3</td>
+          <td>26.9</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>打包工</td>
+          <td>5</td>
+          <td class="wage-cell">21.3</td>
+          <td>19.6</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>叉车工</td>
+          <td>5</td>
+          <td class="wage-cell">29.8</td>
+          <td>29.8</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>焊工</td>
+          <td>5</td>
+          <td class="wage-cell">35.0</td>
+          <td>36.2</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>统计员</td>
+          <td>5</td>
+          <td class="wage-cell">25.0</td>
+          <td>26.9</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>切割工</td>
+          <td>5</td>
+          <td class="wage-cell">33.2</td>
+          <td>31.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:20.00%"></div></td>
+        </tr>
+        <tr>
+          <td>维修工</td>
+          <td>4</td>
+          <td class="wage-cell">34.6</td>
+          <td>25.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:16.00%"></div></td>
+        </tr>
+        <tr>
+          <td>普工</td>
+          <td>3</td>
+          <td class="wage-cell">30.8</td>
+          <td>28.8</td>
+          <td class="bar-cell"><div class="bar kw" style="width:12.00%"></div></td>
+        </tr>
+        <tr>
+          <td>车间工人</td>
+          <td>3</td>
+          <td class="wage-cell">44.2</td>
+          <td>40.4</td>
+          <td class="bar-cell"><div class="bar kw" style="width:12.00%"></div></td>
+        </tr>
+        <tr>
+          <td>学徒工</td>
+          <td>3</td>
+          <td class="wage-cell">26.4</td>
+          <td>25.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:12.00%"></div></td>
+        </tr>
+        <tr>
+          <td>辅助工</td>
+          <td>3</td>
+          <td class="wage-cell">30.6</td>
+          <td>30.6</td>
+          <td class="bar-cell"><div class="bar kw" style="width:12.00%"></div></td>
+        </tr>
+        <tr>
+          <td>流水线工人</td>
+          <td>2</td>
+          <td class="wage-cell">26.0</td>
+          <td>26.0</td>
+          <td class="bar-cell"><div class="bar kw" style="width:8.00%"></div></td>
+        </tr>
+        <tr>
+          <td>机修工</td>
+          <td>2</td>
+          <td class="wage-cell">31.7</td>
+          <td>31.7</td>
+          <td class="bar-cell"><div class="bar kw" style="width:8.00%"></div></td>
+        </tr></tbody>
+            </table></div>
+          </div>
+          <div class="section">
+            <div class="section-title">薪资类型构成</div>
+            <div class="table-wrapper"><table>
+              <thead><tr><th>类型</th><th>数量</th><th>占比</th><th>均时薪</th><th>分布</th></tr></thead>
+              <tbody>
+        <tr>
+          <td>月薪</td>
+          <td>160</td>
+          <td>81%</td>
+          <td class="wage-cell">30.1</td>
+          <td class="bar-cell"><div class="bar type" style="width:100.00%"></div></td>
+        </tr>
+        <tr>
+          <td>未识别</td>
+          <td>17</td>
+          <td>9%</td>
+          <td class="wage-cell">-</td>
+          <td class="bar-cell"><div class="bar type" style="width:10.62%"></div></td>
+        </tr>
+        <tr>
+          <td>日薪</td>
+          <td>16</td>
+          <td>8%</td>
+          <td class="wage-cell">29.9</td>
+          <td class="bar-cell"><div class="bar type" style="width:10.00%"></div></td>
+        </tr>
+        <tr>
+          <td>时薪</td>
+          <td>5</td>
+          <td>3%</td>
+          <td class="wage-cell">25.0</td>
+          <td class="bar-cell"><div class="bar type" style="width:3.12%"></div></td>
+        </tr></tbody>
+            </table></div>
+          </div>
+        </div>
+
+        <div class="welfare-grid">
+          <div class="section">
+            <div class="section-title">福利与补贴占比</div>
+            <div style="background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">包住</span><span class="welfare-pct">55% <em>(109)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:55.05%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">社保/保险</span><span class="welfare-pct">49% <em>(97)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:48.99%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">包吃</span><span class="welfare-pct">47% <em>(94)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:47.47%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">餐补</span><span class="welfare-pct">27% <em>(53)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:26.77%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">五险一金</span><span class="welfare-pct">23% <em>(45)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:22.73%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">加班补贴</span><span class="welfare-pct">22% <em>(44)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:22.22%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">长白班</span><span class="welfare-pct">19% <em>(38)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:19.19%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">夜班补贴</span><span class="welfare-pct">19% <em>(37)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:18.69%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">高温补贴</span><span class="welfare-pct">19% <em>(37)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:18.69%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">免费培训</span><span class="welfare-pct">16% <em>(31)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:15.66%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">坐班</span><span class="welfare-pct">9% <em>(17)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:8.59%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">交通补助</span><span class="welfare-pct">8% <em>(15)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill" style="width:7.58%"></div></div>
+      </div></div>
+          </div>
+          <div class="section">
+            <div class="section-title">结算方式</div>
+            <div style="background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">月结</span><span class="welfare-pct">72% <em>(142)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill settle" style="width:71.72%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">日结</span><span class="welfare-pct">3% <em>(6)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill settle" style="width:3.03%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">周结</span><span class="welfare-pct">1% <em>(1)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill settle" style="width:0.51%"></div></div>
+      </div>
+      <div class="welfare-item">
+        <div class="welfare-head"><span class="welfare-name">完工结算</span><span class="welfare-pct">1% <em>(1)</em></span></div>
+        <div class="welfare-track"><div class="welfare-fill settle" style="width:0.51%"></div></div>
+      </div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">深圳岗位明细<span class="hint">点击列头排序 · 可按行政区筛选</span></div>
+          <div class="filter-bar">
+            <label>行政区筛选:</label>
+            <select id="districtFilter-0"><option value="全部">全部</option><option value="坪山区">坪山区</option><option value="宝安区">宝安区</option><option value="罗湖区">罗湖区</option><option value="龙华区">龙华区</option><option value="福田区">福田区</option><option value="南山区">南山区</option><option value="光明区">光明区</option><option value="其他/未知">其他/未知</option><option value="龙岗区">龙岗区</option><option value="大鹏新区">大鹏新区</option></select>
+            <span id="filterCount-0">共 198 条</span>
+          </div>
+          <div class="table-wrapper table-scroll">
+            <table class="jobs-table" id="jobsTable-0" data-idx="0">
+              <thead><tr>
+                <th data-col="0" data-type="text">岗位标题</th>
+                <th data-col="1" data-type="text">公司</th>
+                <th data-col="2" data-type="text">行政区</th>
+                <th data-col="3" data-type="text">薪资类型</th>
+                <th data-col="4" data-type="text">薪资原文</th>
+                <th data-col="5" data-type="num">换算时薪</th>
+                <th data-col="6" data-type="text">工种</th>
+                <th data-col="7" data-type="date">发布时间</th>
+                <th data-col="8" data-type="text">标签</th>
+              </tr></thead>
+              <tbody>
+        <tr data-district="宝安区" data-sort-idx="0">
+          <td>诚聘6800管吃住可带手机免体检普工</td>
+          <td><a href="https://m.yupao.com/qiye/165376437.html" target="_blank">深圳市利志通企业管理有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>普工</td>
+          <td>2026年07月05日 19:08</td>
+          <td><span class="tag">长白班</span><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">免费培训</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="1">
+          <td>新厂内推普工320/天-不熬夜不压工资</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>普工</td>
+          <td>2026年07月05日 19:06</td>
+          <td><span class="tag">操作机台</span><span class="tag">长白班</span><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="2">
+          <td>数据线生产装盒8000元月，包吃包住/长白班/不看经验/轻松好上手</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>龙岗区 · 横岗</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>普工</td>
+          <td>2026年07月05日 18:37</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="3">
+          <td>【13薪+六险一金】月薪7000-12000，餐补780 发薪准时</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 18:10</td>
+          <td><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">餐补</span><span class="tag">高温补贴</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="4">
+          <td>深圳本地电子厂急招6000-7500/月包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/57778049.html" target="_blank">广州利福企业管理有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 18:05</td>
+          <td><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">电子厂</span><span class="tag">包吃</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="5">
+          <td>招聘普工 经验不限 可预支工资</td>
+          <td><a href="https://m.yupao.com/qiye/64334650.html" target="_blank">深圳市联和创实业有限公司</a></td>
+          <td>龙岗区 · 龙岗中心城</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 18:03</td>
+          <td><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">免费培训</span><span class="tag">包住</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="6">
+          <td>月收6k 长白班 坐班 可预支</td>
+          <td><a href="https://m.yupao.com/qiye/217622509.html" target="_blank">和盛汇</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:39</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="7">
+          <td>【医疗厂】装盒打包/300一天下班拿钱/包吃住/活轻松/可接受学生</td>
+          <td><a href="https://m.yupao.com/qiye/207448108.html" target="_blank">熙聪科技</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:29</td>
+          <td><span class="tag">长白班</span><span class="tag">医疗厂</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">用品厂</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="8">
+          <td>小厂坐班，20元包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/179721428.html" target="_blank">深圳市利鸿耀电子有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:29</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">免费培训</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="9">
+          <td>小厂20元，包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/179721428.html" target="_blank">深圳市利鸿耀电子有限公司</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:27</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">免费培训</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="10">
+          <td>25/h 新开小厂 妹子多 不穿工衣 不体检 可带手机 可预支工资</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区 · 布吉</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:24</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">贴标签</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="11">
+          <td>7000/月 vivo手机打包 坐班 可带手机耳机 不体检 包吃包住</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:24</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">贴标签</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="12">
+          <td>300一天 玩具厂包装 白班包吃包住 不体检 四人间宿舍 可周结</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>宝安区 · 新安</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>操作工</td>
+          <td>2026年07月05日 17:24</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">玩具厂</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="13">
+          <td>自动化装配学徒｜零基础包教！可转调试、稳步晋升！</td>
+          <td><a href="https://m.yupao.com/qiye/215304926.html" target="_blank">海南暨尧科技有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>流水线工人</td>
+          <td>2026年07月05日 15:57</td>
+          <td><span class="tag">学徒工</span><span class="tag">全勤奖</span><span class="tag">包吃</span><span class="tag">五险</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="14">
+          <td>上市科技大厂普工</td>
+          <td><a href="https://m.yupao.com/qiye/189284336.html" target="_blank">深圳华创联动投资有限公司</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>5000-8000元/月</td>
+          <td data-sort-num="25.0">19.2-30.8 元/时</td>
+          <td>流水线工人</td>
+          <td>2026年07月05日 15:54</td>
+          <td><span class="tag">车间</span><span class="tag">普工</span><span class="tag">餐补</span><span class="tag">五险一金</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="15">
+          <td>深圳坪山自动化电工51/时，长白班包吃住。</td>
+          <td><a href="http://m.yupao.com/qiye/3881356.html" target="_blank">肇庆市众智人力资源有限公司</a></td>
+          <td>坪山区 · 坑梓</td>
+          <td>月薪</td>
+          <td>1-1.2万元/月</td>
+          <td data-sort-num="42.30769230769231">38.5-46.2 元/时</td>
+          <td>装配工</td>
+          <td>2026年07月05日 19:12</td>
+          <td><span class="tag">装配电工</span><span class="tag">餐补</span><span class="tag">包住</span><span class="tag">20人以上</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="16">
+          <td>广东深圳有兄弟姐妹们要的吗？电焊，打磨，通风装配工，工作地点，长期活工...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>装配工</td>
+          <td>2026年07月05日 16:40</td>
+          <td><span class="tag">通风安装</span><span class="tag">长期</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="17">
+          <td>工厂自动化设备装配工</td>
+          <td><a href="https://m.yupao.com/qiye/206982629.html" target="_blank">深圳市宇博程信息咨询有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>8000-12000元/月</td>
+          <td data-sort-num="38.46153846153846">30.8-46.2 元/时</td>
+          <td>装配工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">装配工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">11-20人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="18">
+          <td>深圳西丽机器人装配工30-32元/小时-长白班上六休一综合薪资8K</td>
+          <td><a href="https://m.yupao.com/qiye/67388596.html" target="_blank">永祺人力</a></td>
+          <td>宝安区 · 新安</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>装配工</td>
+          <td>2026年07月05日 15:59</td>
+          <td><span class="tag">装配钳工</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">装配钳工，装配电工，机器人组装，设备组装</span><span class="tag">电子电器</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="19">
+          <td>电子厂普工招聘工作简单轻松坐班小时工正式工</td>
+          <td><a href="https://m.yupao.com/qiye/213448133.html" target="_blank">豪鹏集团</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>装配工</td>
+          <td>2026年07月05日 15:59</td>
+          <td><span class="tag">车间</span><span class="tag">普工</span><span class="tag">电子厂</span><span class="tag">包吃</span><span class="tag">五险一金</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="20">
+          <td>17块/小时纯工价暑假工 长白班 两班倒自由选择纯包吃包住 不体检 接受无经验</td>
+          <td><a href="http://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区 · 布吉</td>
+          <td>月薪</td>
+          <td>5000-7000元/月</td>
+          <td data-sort-num="23.076923076923077">19.2-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 19:30</td>
+          <td><span class="tag">长白班</span><span class="tag">礼盒厂</span><span class="tag">车间</span><span class="tag">玩具厂</span><span class="tag">普工</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="21">
+          <td>长期稳定，福利多多！300/天【包吃包住+纯长白班+五险一金】</td>
+          <td><a href="https://m.yupao.com/qiye/211110275.html" target="_blank">河南莎莎企业管理有限公司</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 17:03</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">包吃</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="22">
+          <td>厂区新开部门8000/月，妹妹多，不熬夜，人走账清，长白班坐班</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-10000元/月</td>
+          <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:35</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="23">
+          <td>6500|暑假工|长白班包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区 · 坪地</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:33</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="24">
+          <td>300/天 蓝牙耳机厂打包 坐班包吃包住 可带耳机听歌 不体检</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:02</td>
+          <td><span class="tag">包装工</span><span class="tag">普工/操作工</span><span class="tag">组装工</span><span class="tag">社保</span><span class="tag">加班补贴</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="25">
+          <td>小厂包装7000/月包吃住可预支</td>
+          <td><a href="https://m.yupao.com/qiye/170793411.html" target="_blank">广州雄洋企业管理有限公司</a></td>
+          <td>龙岗区 · 南联</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">包装工</span><span class="tag">普工/操作工</span><span class="tag">组装工</span><span class="tag">社保</span><span class="tag">加班补贴</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="26">
+          <td>17块/小时纯工价招16岁以上暑假工 长白班 两班倒自由选择纯包吃包住 不体检 ...</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区 · 布吉</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">长白班</span><span class="tag">礼盒厂</span><span class="tag">车间</span><span class="tag">玩具厂</span><span class="tag">普工</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="27">
+          <td>自家厂区普工质检白班包吃住+普通工衣+独立岗位+人走账清</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>龙岗区 · 布吉</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="28">
+          <td>普工/组装工/包装工/6500-7000元/坐班</td>
+          <td><a href="https://m.yupao.com/qiye/211450026.html" target="_blank">亿升控股（深圳）有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">组装工</span><span class="tag">五险一金</span><span class="tag">20人以上</span><span class="tag">月结</span><span class="tag">恒温车间</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="29">
+          <td>暑假工/长白班/包吃包住/不体检可带手机</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">普工</span><span class="tag">包吃</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="30">
+          <td>18以上 蓝牙耳机打包300/天坐班包吃住/月休四天</td>
+          <td><a href="https://m.yupao.com/qiye/215748210.html" target="_blank">广轩人力</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:00</td>
+          <td><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">免费培训</span><span class="tag">包吃</span><span class="tag">夜班补贴</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="31">
+          <td>电子厂普工/管吃管住/人走账清/可短期</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>5000-7000元/月</td>
+          <td data-sort-num="23.076923076923077">19.2-26.9 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:00</td>
+          <td><span class="tag">兼职</span><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="32">
+          <td>暑假工坐班包吃住不体检</td>
+          <td><a href="https://m.yupao.com/qiye/215901989.html" target="_blank">深圳市硕豪劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>4000-5000元/月</td>
+          <td data-sort-num="17.307692307692307">15.4-19.2 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 16:00</td>
+          <td><span class="tag">组装工</span><span class="tag">加班补贴</span><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">五险</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="33">
+          <td>长白班坐班蓝牙耳机打包贴标签260一天</td>
+          <td><a href="https://m.yupao.com/qiye/203179769.html" target="_blank">深圳市飞阳人力资源有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>5000-8000元/月</td>
+          <td data-sort-num="25.0">19.2-30.8 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 15:59</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="34">
+          <td>深圳电子厂急招普工/长白班包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/213644257.html" target="_blank">深圳市丰和海企业管理咨询有限公司</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 15:59</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">电子厂</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="35">
+          <td>包装工</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-9000元/月</td>
+          <td data-sort-num="30.769230769230766">26.9-34.6 元/时</td>
+          <td>包装工</td>
+          <td>2026年07月05日 15:58</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="36">
+          <td>龙华急招送货店员（自家店直接来工作店里面试）只送我们一家店到附近小区范...</td>
+          <td><a href="http://m.yupao.com/qiye/166428218.html" target="_blank">团跑跑配送</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>9000-14000元/月</td>
+          <td data-sort-num="44.230769230769226">34.6-53.8 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 19:28</td>
+          <td><span class="tag">货物配送</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">6-10人</span><span class="tag">直招</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="37">
+          <td>广东深圳多多买菜正式工计件工作时间:下午15:30-凌晨2:30左右年龄要求在18-4...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 17:00</td>
+          <td><span class="tag">物流叉车工</span><span class="tag">餐补</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="38">
+          <td>商场智能柜子分拣员（保底4500起</td>
+          <td><a href="https://m.yupao.com/qiye/191154206.html" target="_blank">广西南宁鑫鼎网络科技有限公司</a></td>
+          <td>罗湖区 · 水贝</td>
+          <td>月薪</td>
+          <td>5000-9000元/月</td>
+          <td data-sort-num="26.92307692307692">19.2-34.6 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 16:05</td>
+          <td><span class="tag">分拣</span><span class="tag">免费培训</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="39">
+          <td>石厦山姆骑手等你来400一天</td>
+          <td><a href="https://m.yupao.com/qiye/69790855.html" target="_blank">飞鲸管理</a></td>
+          <td>福田区 · 石厦</td>
+          <td>月薪</td>
+          <td>9000-13000元/月</td>
+          <td data-sort-num="42.30769230769231">34.6-50.0 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">外卖骑手</span><span class="tag">包住</span><span class="tag">3-5人</span><span class="tag">日结</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="40">
+          <td>路边仓库直招送货店员（只送我们一个仓库蔬菜零食为主）当天安排吃住车可以...</td>
+          <td><a href="https://m.yupao.com/qiye/166428218.html" target="_blank">团跑跑配送</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>9000-14000元/月</td>
+          <td data-sort-num="44.230769230769226">34.6-53.8 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 16:01</td>
+          <td><span class="tag">货物配送</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">6-10人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="41">
+          <td>蛇口仓储超市白班分拣员（可预支/无需经验）</td>
+          <td><a href="https://m.yupao.com/qiye/204162740.html" target="_blank">精诚物流供应链</a></td>
+          <td>南山区 · 蛇口</td>
+          <td>月薪</td>
+          <td>5000-7000元/月</td>
+          <td data-sort-num="23.076923076923077">19.2-26.9 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:59</td>
+          <td><span class="tag">打包</span><span class="tag">理货员</span><span class="tag">分拣</span><span class="tag">免费培训</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="42">
+          <td>深圳龙华物料分拣员8000+长白班包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/161860933.html" target="_blank">惠州市么讯物流供应链</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:57</td>
+          <td><span class="tag">分拣</span><span class="tag">包吃</span><span class="tag">免费培训</span><span class="tag">包住</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="43">
+          <td>17/小时暑假工 正式工 长白班坐班 纯包吃包住 不体检 接受无经验</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">长白班</span><span class="tag">礼盒厂</span><span class="tag">车间</span><span class="tag">玩具厂</span><span class="tag">普工</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="44">
+          <td>库房分拣岗位 月薪5500 管吃管住</td>
+          <td><a href="https://m.yupao.com/qiye/165245107.html" target="_blank">北京金磊科技有限公司</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">分拣</span><span class="tag">包吃</span><span class="tag">免费培训</span><span class="tag">包住</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="45">
+          <td>派件员，分拣员</td>
+          <td><a href="https://m.yupao.com/qiye/218123459.html" target="_blank">壹马邦达供应链</a></td>
+          <td>龙岗区 · 平湖</td>
+          <td>月薪</td>
+          <td>8000-11000元/月</td>
+          <td data-sort-num="36.53846153846154">30.8-42.3 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:54</td>
+          <td><span class="tag">快递员</span><span class="tag">包住</span><span class="tag">有提成</span><span class="tag">免费培训</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="46">
+          <td>深圳潮荣供应链招聘C照货车司机</td>
+          <td><a href="https://m.yupao.com/qiye/210257490.html" target="_blank">深圳潮荣供应链科技有限公司</a></td>
+          <td>南山区</td>
+          <td>月薪</td>
+          <td>6000-12000元/月</td>
+          <td data-sort-num="34.61538461538461">23.1-46.2 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:51</td>
+          <td><span class="tag">配送</span><span class="tag">社保</span><span class="tag">20人以上</span><span class="tag">月结</span><span class="tag">市区配送</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="47">
+          <td>急招精英月入8k入职即买社保</td>
+          <td><a href="https://m.yupao.com/qiye/213644257.html" target="_blank">深圳市丰和海企业管理咨询有限公司</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:51</td>
+          <td><span class="tag">用品厂</span><span class="tag">车间</span><span class="tag">包吃</span><span class="tag">有提成</span><span class="tag">交通补助</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="48">
+          <td>400一天洪湖山姆配送员提供车住月入8k+</td>
+          <td><a href="https://m.yupao.com/qiye/69573172.html" target="_blank">华诺</a></td>
+          <td>罗湖区 · 洪湖</td>
+          <td>月薪</td>
+          <td>7000-12000元/月</td>
+          <td data-sort-num="36.53846153846154">26.9-46.2 元/时</td>
+          <td>分拣员</td>
+          <td>2026年07月05日 15:49</td>
+          <td><span class="tag">货物配送</span><span class="tag">包住</span><span class="tag">保险</span><span class="tag">高温补贴</span><span class="tag">餐补</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="49">
+          <td>玩具厂/组装普工/16到40岁/包吃包住</td>
+          <td><a href="https://m.yupao.com/qiye/215901989.html" target="_blank">深圳市硕豪劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>4000-5000元/月</td>
+          <td data-sort-num="17.307692307692307">15.4-19.2 元/时</td>
+          <td>质检员</td>
+          <td>2026年07月05日 17:14</td>
+          <td><span class="tag">玩具厂</span><span class="tag">普工</span><span class="tag">免费培训</span><span class="tag">包吃</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="50">
+          <td>运动相机7500/月，包吃住/不熬夜/不体检</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>质检员</td>
+          <td>2026年07月05日 16:35</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">用品厂</span><span class="tag">普工</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="51">
+          <td>玩具厂/组装普工/16到40岁/包吃包住/入职可预支/人走账清/</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>坪山区 · 坪山</td>
+          <td>月薪</td>
+          <td>5000-8000元/月</td>
+          <td data-sort-num="25.0">19.2-30.8 元/时</td>
+          <td>质检员</td>
+          <td>2026年07月05日 16:04</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="52">
+          <td>CNC品质质检员</td>
+          <td><a href="https://m.yupao.com/qiye/218275562.html" target="_blank">深圳市深度数控技术有限公司</a></td>
+          <td>坪山区 · 坪山</td>
+          <td>月薪</td>
+          <td>7000-10000元/月</td>
+          <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+          <td>质检员</td>
+          <td>2026年07月05日 16:03</td>
+          <td><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="53">
+          <td>240一天耳机包装质检员/包吃住/长白班/入职缴纳五险一金</td>
+          <td><a href="https://m.yupao.com/qiye/209684137.html" target="_blank">广州大帆物流供应链有限公司</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>质检员</td>
+          <td>2026年07月05日 16:02</td>
+          <td><span class="tag">质检员</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">20人以上</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="54">
+          <td>机械工程师</td>
+          <td><a href="https://m.yupao.com/qiye/188912449.html" target="_blank">弘德胜</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>1.2-2万元/月</td>
+          <td data-sort-num="61.53846153846153">46.2-76.9 元/时</td>
+          <td>车间工人</td>
+          <td></td>
+          <td><span class="tag">机械工程师</span><span class="tag">经验不限</span><span class="tag">大专</span><span class="tag">有机械工程师经验</span><span class="tag">自动化机械经验</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="55">
+          <td>数控机床师傅</td>
+          <td><a href="https://m.yupao.com/qiye/215082694.html" target="_blank">深圳市金刃技术有限公司</a></td>
+          <td>坪山区 · 坑梓</td>
+          <td>月薪</td>
+          <td>8000-13000元/月</td>
+          <td data-sort-num="40.38461538461539">30.8-50.0 元/时</td>
+          <td>车间工人</td>
+          <td>2026年07月01日 12:28</td>
+          <td><span class="tag">数控</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="56">
+          <td>倒糖 拉糖 煮糖25元+1元</td>
+          <td><a href="https://m.yupao.com/qiye/183521080.html" target="_blank">深圳市为华人力资源有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-10000元/月</td>
+          <td data-sort-num="30.769230769230766">23.1-38.5 元/时</td>
+          <td>车间工人</td>
+          <td>2026年06月16日 15:31</td>
+          <td><span class="tag">包装工</span><span class="tag">包住</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">6-10人</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="57">
+          <td>拖挂车机修工</td>
+          <td><a href="https://m.yupao.com/qiye/199819300.html" target="_blank">深圳市万兴达汽车服务有限公司</a></td>
+          <td>南山区</td>
+          <td>月薪</td>
+          <td>8000-12000元/月</td>
+          <td data-sort-num="38.46153846153846">30.8-46.2 元/时</td>
+          <td>机修工</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">机修工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">保险</span><span class="tag">餐补</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="58">
+          <td>广东深圳机修工，要电工证，高中以上（要毕业证），25-45岁，有电工经验，...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>机修工</td>
+          <td>2026年07月05日 10:06</td>
+          <td><span class="tag">机械维修工</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="59">
+          <td>新厂区 月入 8.5K/ 白班/坐班/包吃住/可借支</td>
+          <td><a href="https://m.yupao.com/qiye/160985719.html" target="_blank">深圳市诚展实业有限公司</a></td>
+          <td>坪山区 · 坪山</td>
+          <td>月薪</td>
+          <td>7000-10000元/月</td>
+          <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 16:06</td>
+          <td><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">免费培训</span><span class="tag">包吃</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="60">
+          <td>深企无人机新厂急招/愿意干包过/免费吃住/不体检/长白班/280一天</td>
+          <td><a href="https://m.yupao.com/qiye/191531000.html" target="_blank">深圳市博途智科技有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:58</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="61">
+          <td>普工可日结+独立岗位+可带手机</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>坪山区 · 坪山</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>物料员</td>
+          <td></td>
+          <td><span class="tag">物料员</span><span class="tag">经验不限</span><span class="tag">初中及以下</span><span class="tag">不需要出差</span><span class="tag">包吃住</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="62">
+          <td>小厂长白班独立岗 免体检</td>
+          <td><a href="https://m.yupao.com/qiye/215901989.html" target="_blank">深圳市硕豪劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="63">
+          <td>学生工手工活不体检人来当天安排包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/154268369.html" target="_blank">和盛汇</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">贴标签</span><span class="tag">包吃</span><span class="tag">包住</span><span class="tag">20人以上</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="64">
+          <td>IPQC质检280/天可带手机+包吃住+可短期+普工/操作工</td>
+          <td><a href="https://m.yupao.com/qiye/160985719.html" target="_blank">深圳市诚展实业有限公司</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="65">
+          <td>8000普通工衣不体检可预支</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:54</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">贴标签</span><span class="tag">免费培训</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="66">
+          <td>新厂/急聘普工/坐班/手工活</td>
+          <td><a href="https://m.yupao.com/qiye/168827275.html" target="_blank">深圳市辉煌成就劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:54</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="67">
+          <td>物料员+月薪5-6K</td>
+          <td><a href="https://m.yupao.com/qiye/7502429.html" target="_blank">深圳有才综合服务有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>物料员</td>
+          <td></td>
+          <td><span class="tag">物料员</span><span class="tag">1年以下</span><span class="tag">高中</span><span class="tag">不需要出差</span><span class="tag">双休</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="68">
+          <td>网红白班坐岗电子厂普工临时工包吃住轻松不累</td>
+          <td><a href="https://m.yupao.com/qiye/213448133.html" target="_blank">豪鹏集团</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:53</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">电子厂</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="69">
+          <td>无人机组装包装工280/天+可带手机+普通工衣</td>
+          <td><a href="https://m.yupao.com/qiye/160985719.html" target="_blank">深圳市诚展实业有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:52</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="70">
+          <td>电子厂正式工 月薪8500+入职购买五险一金</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">车间</span><span class="tag">贴标签</span><span class="tag">电子厂</span><span class="tag">免费培训</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="71">
+          <td>长白班 手工活 不体检 可以带手机 做事轻松</td>
+          <td><a href="https://m.yupao.com/qiye/180961658.html" target="_blank">深圳市深启职业咨询有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">长白班</span><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">包吃</span><span class="tag">夜班补贴</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="72">
+          <td>小厂管理不严，包吃住可带手机耳机，260/天，短期长期皆可以</td>
+          <td><a href="https://m.yupao.com/qiye/212430316.html" target="_blank">深圳市粤莱顺企业管理有限公司</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="73">
+          <td>可周结长白班不体检带手机包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/180961658.html" target="_blank">深圳市深启职业咨询有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">包装工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">夜班补贴</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="74">
+          <td>普工电子厂7k包吃住白班坐班</td>
+          <td><a href="https://m.yupao.com/qiye/213448133.html" target="_blank">豪鹏集团</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:49</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">电子厂</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="75">
+          <td>电子厂SMT 测试+月薪8500+入职购买五险一金</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>7000-9000元/月</td>
+          <td data-sort-num="30.769230769230766">26.9-34.6 元/时</td>
+          <td>物料员</td>
+          <td>2026年07月05日 15:49</td>
+          <td><span class="tag">车间</span><span class="tag">普工</span><span class="tag">贴标签</span><span class="tag">电子厂</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="76">
+          <td>质量管理</td>
+          <td><a href="http://m.yupao.com/qiye/217951359.html" target="_blank">鄂龙腾</a></td>
+          <td>龙岗区 · 坪地</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 16:05</td>
+          <td><span class="tag">质量管理</span><span class="tag">包吃</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="77">
+          <td>检验员</td>
+          <td><a href="https://m.yupao.com/qiye/217951359.html" target="_blank">鄂龙腾</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:58</td>
+          <td><span class="tag">品检工</span><span class="tag">社保</span><span class="tag">包吃</span><span class="tag">五险</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="78">
+          <td>质检员</td>
+          <td><a href="https://m.yupao.com/qiye/217606502.html" target="_blank">深圳市惠富鑫通信</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-10000元/月</td>
+          <td data-sort-num="30.769230769230766">23.1-38.5 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:53</td>
+          <td><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="79">
+          <td>工厂直招-IPQC质检员</td>
+          <td><a href="https://m.yupao.com/qiye/153577769.html" target="_blank">博硕科技</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:52</td>
+          <td><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">高温补贴</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="80">
+          <td>质检员/检验员</td>
+          <td><a href="https://m.yupao.com/qiye/50599324.html" target="_blank">深圳数码模</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:44</td>
+          <td><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">五险一金</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="81">
+          <td>质检检验员（男女不限）月7000</td>
+          <td><a href="https://m.yupao.com/qiye/174262063.html" target="_blank">富联华</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:43</td>
+          <td><span class="tag">品检工</span><span class="tag">质检员</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">高温补贴</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="82">
+          <td>aoi测试员</td>
+          <td><a href="https://m.yupao.com/qiye/202042978.html" target="_blank">深圳市昉科电子科技有限公司</a></td>
+          <td>光明区 · 光明新区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:42</td>
+          <td><span class="tag">质检员</span><span class="tag">品检工</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">五险</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="83">
+          <td>质检检验员（男女不限）7000</td>
+          <td><a href="https://m.yupao.com/qiye/174262063.html" target="_blank">富联华</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:41</td>
+          <td><span class="tag">品检工</span><span class="tag">质检员</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">高温补贴</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="84">
+          <td>SMT操作员包住月薪6K-8K五险需要长期稳定</td>
+          <td><a href="https://m.yupao.com/qiye/202042978.html" target="_blank">深圳市昉科电子科技有限公司</a></td>
+          <td>光明区 · 光明新区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:39</td>
+          <td><span class="tag">电子厂</span><span class="tag">长白班</span><span class="tag">普工</span><span class="tag">夜班补贴</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="85">
+          <td>质量助理工程师</td>
+          <td><a href="https://m.yupao.com/qiye/195137696.html" target="_blank">富创光电(深圳)有限公司</a></td>
+          <td>福田区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:34</td>
+          <td><span class="tag">质量管理</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="86">
+          <td>QA检验员（公司直招）</td>
+          <td><a href="https://m.yupao.com/qiye/195137696.html" target="_blank">富创光电(深圳)有限公司</a></td>
+          <td>福田区</td>
+          <td>月薪</td>
+          <td>4000-7000元/月</td>
+          <td data-sort-num="21.153846153846153">15.4-26.9 元/时</td>
+          <td>检验员</td>
+          <td>2026年07月05日 15:34</td>
+          <td><span class="tag">品检工</span><span class="tag">质检员</span><span class="tag">餐补</span><span class="tag">包住</span><span class="tag">五险一金</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="87">
+          <td>会盘扣架打包工期两个月 工资月结</td>
+          <td></td>
+          <td>罗湖区 · 布心</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>打包工</td>
+          <td>2026年07月05日 19:13</td>
+          <td><span class="tag">小工</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="88">
+          <td>服务员，打包工，外卖商家</td>
+          <td><a href="https://m.yupao.com/qiye/203388734.html" target="_blank">深圳市鸿鑫源餐饮管理有限公司</a></td>
+          <td>南山区 · 西丽</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>打包工</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">服务员</span><span class="tag">6-10人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="89">
+          <td>300一天新开纸箱厂 公寓宿舍 包吃住 做事简单 可带手机耳机 交五险</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>打包工</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">普工</span><span class="tag">车间</span><span class="tag">纸箱厂</span><span class="tag">钉箱工</span><span class="tag">长白班</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="90">
+          <td>招聘家具打包。有经验优先</td>
+          <td><a href="https://m.yupao.com/qiye/17272671.html" target="_blank">哈深装饰材料</a></td>
+          <td>龙岗区 · 坪地</td>
+          <td>时薪</td>
+          <td>10-30元/时</td>
+          <td data-sort-num="20.0">10.0-30.0 元/时</td>
+          <td>打包工</td>
+          <td>2026年07月05日 15:43</td>
+          <td><span class="tag">包装工</span><span class="tag">包吃</span><span class="tag">1-2人</span><span class="tag">日结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="91">
+          <td>打包工</td>
+          <td><a href="https://m.yupao.com/qiye/218366356.html" target="_blank">深圳市吉多多饰品有限公司</a></td>
+          <td>宝安区 · 新安</td>
+          <td>月薪</td>
+          <td>4000-5000元/月</td>
+          <td data-sort-num="17.307692307692307">15.4-19.2 元/时</td>
+          <td>打包工</td>
+          <td>2026年07月05日 12:53</td>
+          <td><span class="tag">打包</span><span class="tag">理货员</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="92">
+          <td>深圳罗湖区招叉车工</td>
+          <td></td>
+          <td>罗湖区 · 清水河</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>叉车工</td>
+          <td>2026年07月05日 19:20</td>
+          <td><span class="tag">叉车工</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="93">
+          <td>工厂叉车/吃住免费/26/小时</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>叉车工</td>
+          <td>2026年07月05日 18:37</td>
+          <td><span class="tag">叉车工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">20人以上</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="94">
+          <td>深圳宝安区招叉车工，要求有叉车证，吃苦耐劳，车技熟练，有三年以上叉车经...</td>
+          <td><a href="https://m.yupao.com/qiye/41175627.html" target="_blank">深圳市聚兴建材实业有限公司</a></td>
+          <td>宝安区 · 新安</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>叉车工</td>
+          <td>2026年07月05日 18:07</td>
+          <td><span class="tag">叉车工</span><span class="tag">长期</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="95">
+          <td>深圳光明区招叉车工</td>
+          <td></td>
+          <td>光明区 · 公明</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>叉车工</td>
+          <td>2026年07月05日 17:25</td>
+          <td><span class="tag">叉车工</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="96">
+          <td>广东深圳招聘叉车工和普工。叉车工岗位要求具备叉车操作技能，能够适应两班...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>叉车工</td>
+          <td>2026年07月05日 17:14</td>
+          <td><span class="tag">叉车工</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="97">
+          <td>深圳宝安区招电焊(焊工)一名消防安装支架需要有证件有产业培训优先￼8.5小时</td>
+          <td></td>
+          <td>宝安区</td>
+          <td>日薪</td>
+          <td>370-380元/天</td>
+          <td data-sort-num="37.5">37.0-38.0 元/时</td>
+          <td>焊工</td>
+          <td>2026年07月05日 20:01</td>
+          <td><span class="tag">消防安装</span><span class="tag">电焊</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="98">
+          <td>360-420/天，包吃住，来20个焊工干活</td>
+          <td></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>1-1.2万元/月</td>
+          <td data-sort-num="42.30769230769231">38.5-46.2 元/时</td>
+          <td>焊工</td>
+          <td>2026年07月05日 19:55</td>
+          <td><span class="tag">焊工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="99">
+          <td>深圳南山区有焊工证，会做幕墙骨架，会安装铝板。可做到11月，长期工。</td>
+          <td></td>
+          <td>南山区 · 前海</td>
+          <td>日薪</td>
+          <td>300-400元/天</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>焊工</td>
+          <td>2026年07月05日 19:54</td>
+          <td><span class="tag">焊幕墙</span><span class="tag">幕墙安装</span><span class="tag">铝单板</span><span class="tag">焊工</span><span class="tag">焊龙骨</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="100">
+          <td>深圳宝安区电焊工，不锈钢管道安装工，中工，小工</td>
+          <td></td>
+          <td>宝安区</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>焊工</td>
+          <td>2026年07月05日 19:52</td>
+          <td><span class="tag">管道安装</span><span class="tag">小工</span><span class="tag">电焊</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="101">
+          <td>广东深圳有空的焊工·小工活在盐田中英街·有联系</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>焊工</td>
+          <td>2026年07月05日 19:49</td>
+          <td><span class="tag">工厂焊工</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="102">
+          <td>深圳罗湖区招水电工，需要帮忙排线，拉线，需要年轻人去吊顶上面，要爬上爬...</td>
+          <td></td>
+          <td>罗湖区 · 泥岗</td>
+          <td>日薪</td>
+          <td>300-400元/天</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 20:04</td>
+          <td><span class="tag">水电工</span><span class="tag">1-2人</span><span class="tag">电工证</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="103">
+          <td>深圳宝安区招电工1名，要有做无尘车间经验的电工师傅，2天活，附近的师傅联...</td>
+          <td></td>
+          <td>宝安区 · 福永</td>
+          <td>日薪</td>
+          <td>300-350元/天</td>
+          <td data-sort-num="32.5">30.0-35.0 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:38</td>
+          <td><span class="tag">电工</span><span class="tag">1-4天</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="104">
+          <td>深圳光明区安装立体仓库输送机会布线接线提升机电工大工43小时中工35一小时...</td>
+          <td><a href="https://m.yupao.com/qiye/22702504.html" target="_blank">西华县米多米电气有限公司</a></td>
+          <td>光明区 · 光明新区</td>
+          <td>日薪</td>
+          <td>300-400元/天</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:31</td>
+          <td><span class="tag">桥架</span><span class="tag">电工</span><span class="tag">机电工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="105">
+          <td>深圳福田区招聘水电工两名，岗位职责1.对项目工程的给水、排水、暖气、和各...</td>
+          <td></td>
+          <td>福田区 · 上梅林</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:27</td>
+          <td><span class="tag">水电工</span><span class="tag">暖气</span><span class="tag">给排水工</span><span class="tag">水暖工</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="106">
+          <td>直流充电桩运维工程师(广东)</td>
+          <td><a href="https://m.yupao.com/qiye/204330971.html" target="_blank">格瑞因新能源</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>7000-10000元/月</td>
+          <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:26</td>
+          <td><span class="tag">充电桩安装</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="107">
+          <td>深圳福田区客房水电工，长期，兼职勿扰看清楚再联系招聘要求1.有电工证日常...</td>
+          <td><a href="https://m.yupao.com/qiye/165589033.html" target="_blank">深圳市南国之春酒店管理有限公司</a></td>
+          <td>福田区 · 香蜜湖</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:25</td>
+          <td><span class="tag">水电工</span><span class="tag">长期</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">电工证</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="108">
+          <td>深圳龙岗区泰康之家鹏园（深圳）养老服务有限公司招聘工程技工2名。岗位职...</td>
+          <td></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:23</td>
+          <td><span class="tag">综合维修工</span><span class="tag">1-2人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="109">
+          <td>制冷工程师</td>
+          <td><a href="https://m.yupao.com/qiye/205694992.html" target="_blank">深圳市碧波制冷设备有限公司</a></td>
+          <td>福田区 · 中心区</td>
+          <td>日薪</td>
+          <td>300-400元/天</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>电工</td>
+          <td>2026年07月05日 19:23</td>
+          <td><span class="tag">空调安装</span><span class="tag">1-2人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="110">
+          <td>深圳宝安区招装修工地学徒工，中工，要求:有一定水电、装修基础</td>
+          <td><a href="http://m.yupao.com/qiye/25628946.html" target="_blank">深圳市新晶艺建筑装饰工程有限公司</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>学徒工</td>
+          <td>2026年07月05日 20:03</td>
+          <td><span class="tag">水电工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="111">
+          <td>深圳龙岗区招空调安装/维修、工地学徒工</td>
+          <td></td>
+          <td>龙岗区 · 坪地</td>
+          <td>日薪</td>
+          <td>300-400元/天</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>学徒工</td>
+          <td>2026年07月05日 19:27</td>
+          <td><span class="tag">空调安装</span><span class="tag">工地学徒工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="112">
+          <td>深圳南山区招工地学徒工(学徒工)做餐饮门店各种维修</td>
+          <td><a href="https://m.yupao.com/qiye/21589261.html" target="_blank">深圳市飞展装饰工程有限公司</a></td>
+          <td>南山区 · 南头</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>学徒工</td>
+          <td>2026年07月05日 19:13</td>
+          <td><span class="tag">工地学徒工</span><span class="tag">长期</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="113">
+          <td>厨房杂工(烧腊加工场)</td>
+          <td><a href="https://m.yupao.com/qiye/153177597.html" target="_blank">深圳市宝安区沙井...</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:09</td>
+          <td><span class="tag">杂工</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span><span class="tag">厨房</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="114">
+          <td>深圳宝安区招工地小工/杂工</td>
+          <td></td>
+          <td>宝安区</td>
+          <td>时薪</td>
+          <td>20-30元/时</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:09</td>
+          <td><span class="tag">小工</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="115">
+          <td>深圳龙华区招工地小工/杂工</td>
+          <td></td>
+          <td>龙华区</td>
+          <td>日薪</td>
+          <td>220-260元/天</td>
+          <td data-sort-num="24.0">22.0-26.0 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:06</td>
+          <td><span class="tag">小工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="大鹏新区" data-sort-idx="116">
+          <td>广东深圳招工地力工、工地小工/杂工</td>
+          <td></td>
+          <td>大鹏新区</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:03</td>
+          <td><span class="tag">小工</span><span class="tag">力工</span><span class="tag">1-4天</span><span class="tag">3-5人</span><span class="tag">日结</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="117">
+          <td>深圳福田区招工地小工/杂工需要10个人，9小时，日结，180加班，需要加班必...</td>
+          <td></td>
+          <td>福田区 · 购物公园</td>
+          <td>日薪</td>
+          <td>180-200元/天</td>
+          <td data-sort-num="19.0">18.0-20.0 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:01</td>
+          <td><span class="tag">小工</span><span class="tag">力工</span><span class="tag">活动布场</span><span class="tag">6-10人</span><span class="tag">日结</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="118">
+          <td>深圳市政道路工程招聘杂工及门卫</td>
+          <td><a href="https://m.yupao.com/qiye/6998264.html" target="_blank">深圳市顺安普建筑工程有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 20:00</td>
+          <td><span class="tag">小工</span><span class="tag">长期</span><span class="tag">包住</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="119">
+          <td>深圳宝安区招外架、工地小工/杂工</td>
+          <td></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>1-1.1万元/月</td>
+          <td data-sort-num="40.38461538461539">38.5-42.3 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 19:50</td>
+          <td><span class="tag">外架</span><span class="tag">小工</span><span class="tag">长期</span><span class="tag">1-2人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="120">
+          <td>深圳光明区工地直招建筑大小工杂工，小工220-300元一天包吃住，小工，杂工...</td>
+          <td></td>
+          <td>光明区</td>
+          <td>时薪</td>
+          <td>30-40元/时</td>
+          <td data-sort-num="35.0">30.0-40.0 元/时</td>
+          <td>杂工</td>
+          <td>2026年07月05日 19:45</td>
+          <td><span class="tag">振捣工</span><span class="tag">小工</span><span class="tag">收面</span><span class="tag">3-6个月</span><span class="tag">11-20人</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="121">
+          <td>广东深圳南山需要钢结构铆工、焊工、铆工辅助工，打磨工，杂工包吃包住，￼可...</td>
+          <td></td>
+          <td>南山区</td>
+          <td>日薪</td>
+          <td>300-500元/天</td>
+          <td data-sort-num="40.0">30.0-50.0 元/时</td>
+          <td>辅助工</td>
+          <td>2026年07月05日 19:28</td>
+          <td><span class="tag">钢结构</span><span class="tag">小工</span><span class="tag">铆工</span><span class="tag">焊工</span><span class="tag">打磨</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="122">
+          <td>广东深圳深圳胜宝旺场地明程公司招聘辅助工10人、铆工领班6人、铆工10人以...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>辅助工</td>
+          <td>2026年07月05日 16:23</td>
+          <td><span class="tag">铆工</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="123">
+          <td>剪辑师</td>
+          <td><a href="https://m.yupao.com/qiye/211608924.html" target="_blank">深圳麦飞国际生活服务</a></td>
+          <td>南山区</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>辅助工</td>
+          <td></td>
+          <td><span class="tag">剪辑师</span><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="124">
+          <td>深圳宝安区整个南山区京东网单，格力美的华菱小米海尔TCL等十几个品牌需要...</td>
+          <td><a href="https://m.yupao.com/qiye/188390138.html" target="_blank">上海轩然供应链管理有限公司</a></td>
+          <td>宝安区 · 西乡</td>
+          <td>月薪</td>
+          <td>1.6-1.8万元/月</td>
+          <td data-sort-num="65.38461538461539">61.5-69.2 元/时</td>
+          <td>维修工</td>
+          <td>2026年07月05日 17:26</td>
+          <td><span class="tag">铜管</span><span class="tag">长期</span><span class="tag">20人以上</span><span class="tag">月结</span><span class="tag">技术好</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="125">
+          <td>叉车维修师傅</td>
+          <td><a href="https://m.yupao.com/qiye/13477235.html" target="_blank">森玛工业设备有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>5000-9000元/月</td>
+          <td data-sort-num="26.92307692307692">19.2-34.6 元/时</td>
+          <td>维修工</td>
+          <td>2026年07月05日 17:04</td>
+          <td><span class="tag">叉车工</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="126">
+          <td>汽车维修中工</td>
+          <td><a href="https://m.yupao.com/qiye/218007541.html" target="_blank">深圳市宝安区西乡安记汽车服务店</a></td>
+          <td>宝安区 · 西乡</td>
+          <td>月薪</td>
+          <td>4000-8000元/月</td>
+          <td data-sort-num="23.076923076923077">15.4-30.8 元/时</td>
+          <td>维修工</td>
+          <td>2026年07月05日 15:58</td>
+          <td><span class="tag">汽车维修</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="127">
+          <td>维修工</td>
+          <td><a href="https://m.yupao.com/qiye/216976026.html" target="_blank">安徽中天保安服务集团有限公司深圳分公司</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>5000-7000元/月</td>
+          <td data-sort-num="23.076923076923077">19.2-26.9 元/时</td>
+          <td>维修工</td>
+          <td>2026年07月05日 15:55</td>
+          <td><span class="tag">综合维修工</span><span class="tag">保险</span><span class="tag">包住</span><span class="tag">高温补贴</span><span class="tag">餐补</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="128">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/209142977.html" target="_blank">深圳市伟宏达科技有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月05日 08:00</td>
+          <td><span class="tag">CNC</span><span class="tag">包住</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="129">
+          <td>调机师傅/调机员/自编自调都要（两班倒+薪资9-15k）</td>
+          <td><a href="https://m.yupao.com/qiye/204585329.html" target="_blank">大龙五金</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>9000-14000元/月</td>
+          <td data-sort-num="44.230769230769226">34.6-53.8 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月03日 08:01</td>
+          <td><span class="tag">CNC</span><span class="tag">数控</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="130">
+          <td>CNC编程工程师（自编自调）</td>
+          <td><a href="https://m.yupao.com/qiye/206730592.html" target="_blank">深圳华阳新材料</a></td>
+          <td>宝安区 · 宝体</td>
+          <td>月薪</td>
+          <td>1-1.4万元/月</td>
+          <td data-sort-num="46.15384615384615">38.5-53.8 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月02日 14:40</td>
+          <td><span class="tag">CNC</span><span class="tag">保险</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="131">
+          <td>深圳光明区招聘岗位:CNC数控铣床调机员·操机员待遇:买社保，包住，工资待遇...</td>
+          <td><a href="https://m.yupao.com/qiye/205326502.html" target="_blank">盛悦科技</a></td>
+          <td>光明区 · 公明</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>调机员</td>
+          <td>2026年07月02日 13:28</td>
+          <td><span class="tag">数控</span><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="132">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/206730592.html" target="_blank">深圳华阳新材料</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月02日 13:03</td>
+          <td><span class="tag">数控</span><span class="tag">CNC</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="133">
+          <td>CNC数控调机员</td>
+          <td><a href="https://m.yupao.com/qiye/206909388.html" target="_blank">科瑞科技</a></td>
+          <td>宝安区 · 光明新区</td>
+          <td>月薪</td>
+          <td>8000-11000元/月</td>
+          <td data-sort-num="36.53846153846154">30.8-42.3 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月01日 15:09</td>
+          <td><span class="tag">数控</span><span class="tag">CNC</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="134">
+          <td>cnc调机员</td>
+          <td><a href="https://m.yupao.com/qiye/174558658.html" target="_blank">深圳市风云智创科技有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年07月01日 13:48</td>
+          <td><span class="tag">CNC</span><span class="tag">调机技术员</span><span class="tag">保险</span><span class="tag">社保</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="135">
+          <td>编程师傅，调机员</td>
+          <td><a href="https://m.yupao.com/qiye/9851553.html" target="_blank">博瑞锦</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>1-1.5万元/月</td>
+          <td data-sort-num="48.07692307692308">38.5-57.7 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月30日 14:56</td>
+          <td><span class="tag">CNC</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="136">
+          <td>加工中心调机员</td>
+          <td><a href="https://m.yupao.com/qiye/59309036.html" target="_blank">旭鑫精密</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月30日 14:05</td>
+          <td><span class="tag">CNC</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">3-5人</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="137">
+          <td>招聘.CNC加工中心调机师傅</td>
+          <td><a href="https://m.yupao.com/qiye/190651394.html" target="_blank">深圳市益源达精密机械</a></td>
+          <td>其他/未知</td>
+          <td>月薪</td>
+          <td>9000-11000元/月</td>
+          <td data-sort-num="38.46153846153846">34.6-42.3 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月30日 13:33</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="138">
+          <td>CNC编程</td>
+          <td><a href="https://m.yupao.com/qiye/9851553.html" target="_blank">博瑞锦</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>1-1.5万元/月</td>
+          <td data-sort-num="48.07692307692308">38.5-57.7 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月30日 13:14</td>
+          <td><span class="tag">CNC</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="139">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/206217741.html" target="_blank">景飞精密制造有限公司</a></td>
+          <td>光明区 · 公明</td>
+          <td>月薪</td>
+          <td>8000-12000元/月</td>
+          <td data-sort-num="38.46153846153846">30.8-46.2 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月29日 14:56</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="140">
+          <td>CNC调机员，编程师傅</td>
+          <td><a href="https://m.yupao.com/qiye/9851553.html" target="_blank">博瑞锦</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>1-1.5万元/月</td>
+          <td data-sort-num="48.07692307692308">38.5-57.7 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月29日 14:24</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="光明区" data-sort-idx="141">
+          <td>生产技术员</td>
+          <td><a href="https://m.yupao.com/qiye/36475924.html" target="_blank">可丁</a></td>
+          <td>光明区</td>
+          <td>月薪</td>
+          <td>5000-7000元/月</td>
+          <td data-sort-num="23.076923076923077">19.2-26.9 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月29日 13:30</td>
+          <td><span class="tag">生产技术员</span><span class="tag">年终奖</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">五险一金</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="142">
+          <td>CNC操机员/调机员</td>
+          <td><a href="https://m.yupao.com/qiye/203561590.html" target="_blank">深圳市佳速尔精密机械有限公司</a></td>
+          <td>宝安区</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>调机员</td>
+          <td>2026年06月29日 13:14</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">3-5人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="143">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/9851553.html" target="_blank">博瑞锦</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>9000-10000元/月</td>
+          <td data-sort-num="36.53846153846153">34.6-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月29日 12:31</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="144">
+          <td>招聘CNC编程师傅</td>
+          <td><a href="https://m.yupao.com/qiye/9851553.html" target="_blank">博瑞锦</a></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>调机员</td>
+          <td>2026年06月28日 14:31</td>
+          <td><span class="tag">CNC</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="145">
+          <td>CNC调机员，数控师傅</td>
+          <td><a href="https://m.yupao.com/qiye/214218547.html" target="_blank">创金机械</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>8000-10000元/月</td>
+          <td data-sort-num="34.61538461538461">30.8-38.5 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月28日 14:19</td>
+          <td><span class="tag">数控</span><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="146">
+          <td>激光镭雕调机员</td>
+          <td><a href="https://m.yupao.com/qiye/207316670.html" target="_blank">晶森激光</a></td>
+          <td>南山区</td>
+          <td>月薪</td>
+          <td>7000-10000元/月</td>
+          <td data-sort-num="32.69230769230769">26.9-38.5 元/时</td>
+          <td>调机员</td>
+          <td></td>
+          <td><span class="tag">光学工程师</span><span class="tag">1-3年</span><span class="tag">高中</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="147">
+          <td>注塑领班/调机员</td>
+          <td><a href="https://m.yupao.com/qiye/65827694.html" target="_blank">智云高科</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-11000元/月</td>
+          <td data-sort-num="36.53846153846154">30.8-42.3 元/时</td>
+          <td>调机员</td>
+          <td></td>
+          <td><span class="tag">生产组长/拉长</span><span class="tag">3-5年</span><span class="tag">学历不限</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="148">
+          <td>深圳宝安区因生产需求，现招聘CNC调机员，主要生产自动化设备的零配件，买...</td>
+          <td><a href="https://m.yupao.com/qiye/181551984.html" target="_blank">深圳市同创佳业机电</a></td>
+          <td>宝安区 · 石岩</td>
+          <td>月薪</td>
+          <td>6000-9000元/月</td>
+          <td data-sort-num="28.846153846153847">23.1-34.6 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月28日 12:54</td>
+          <td><span class="tag">CNC</span><span class="tag">保险</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="149">
+          <td>CNC加工中心调机员</td>
+          <td><a href="https://m.yupao.com/qiye/196384788.html" target="_blank">精艺公司</a></td>
+          <td>宝安区 · 石岩</td>
+          <td>月薪</td>
+          <td>7000-11000元/月</td>
+          <td data-sort-num="34.61538461538461">26.9-42.3 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月28日 12:35</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="150">
+          <td>CNC编程调机员</td>
+          <td><a href="https://m.yupao.com/qiye/198684113.html" target="_blank">深圳市旺祥精密制造有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>1.1-1.4万元/月</td>
+          <td data-sort-num="48.07692307692308">42.3-53.8 元/时</td>
+          <td>调机员</td>
+          <td>2026年06月28日 12:21</td>
+          <td><span class="tag">CNC</span><span class="tag">社保</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="151">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/196456957.html" target="_blank">深圳市精锐劳务派遣有限公司</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>1.2-1.3万元/月</td>
+          <td data-sort-num="48.07692307692308">46.2-50.0 元/时</td>
+          <td>调机员</td>
+          <td>2026年04月22日 08:02</td>
+          <td><span class="tag">数控</span><span class="tag">CNC</span><span class="tag">保险</span><span class="tag">包住</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="152">
+          <td>CNC调机员</td>
+          <td><a href="https://m.yupao.com/qiye/208590803.html" target="_blank">智拓</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>8000-11000元/月</td>
+          <td data-sort-num="36.53846153846154">30.8-42.3 元/时</td>
+          <td>调机员</td>
+          <td>2026年03月03日 14:49</td>
+          <td><span class="tag">CNC</span><span class="tag">保险</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="153">
+          <td>工厂直招深技正式工</td>
+          <td><a href="http://m.yupao.com/qiye/217515181.html" target="_blank">天地人派遣有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 16:02</td>
+          <td><span class="tag">长白班</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">打印机</span><span class="tag">社保</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="154">
+          <td>21/存工价！塘尾路由器厂大量缺人，坐班多</td>
+          <td><a href="https://m.yupao.com/qiye/11572089.html" target="_blank">俊鑫长兴人力资源（深圳）有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:56</td>
+          <td><span class="tag">车间</span><span class="tag">普工</span><span class="tag">打印机</span><span class="tag">餐补</span><span class="tag">包住</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="155">
+          <td>塘尾独立岗位21+包住提供吃+人走账清</td>
+          <td><a href="https://m.yupao.com/qiye/201381647.html" target="_blank">广东新粤能装备有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:50</td>
+          <td><span class="tag">兼职</span><span class="tag">组装工</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">11-20人</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="156">
+          <td>（暑假工/短期均可）小厂包吃住/全坐班可借支</td>
+          <td><a href="https://m.yupao.com/qiye/188856097.html" target="_blank">永辉煌劳务派遣</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:48</td>
+          <td><span class="tag">包装工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">餐补</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="157">
+          <td>无人机看机器坐班+不用夜班+30一小时包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/68242308.html" target="_blank">衡泰华实业（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:45</td>
+          <td><span class="tag">组装工</span><span class="tag">加班补贴</span><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">五险</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="158">
+          <td>小风扇厂打包组装长白班 210/天包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/212430316.html" target="_blank">深圳市粤莱顺企业管理有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:44</td>
+          <td><span class="tag">普工</span><span class="tag">风扇厂</span><span class="tag">车间</span><span class="tag">操作工</span><span class="tag">长白班</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="159">
+          <td>暑假工/小时工包吃住不体检/人走账清</td>
+          <td><a href="https://m.yupao.com/qiye/188856097.html" target="_blank">永辉煌劳务派遣</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:43</td>
+          <td><span class="tag">组装工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">夜班补贴</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="160">
+          <td>手表厂招两普工长白班 220/天包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/212430316.html" target="_blank">深圳市粤莱顺企业管理有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:43</td>
+          <td><span class="tag">普工</span><span class="tag">车间</span><span class="tag">手表厂</span><span class="tag">操作工</span><span class="tag">长白班</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="161">
+          <td>300/天 纸盒厂 四人间 包吃住 人走账清</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙岗区 · 布吉</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:43</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="162">
+          <td>240一天/打包/贴标/独立岗位/可预支</td>
+          <td><a href="https://m.yupao.com/qiye/214234913.html" target="_blank">深圳市元恒芯电子科技有限公司</a></td>
+          <td>龙岗区 · 横岗</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:42</td>
+          <td><span class="tag">贴标签</span><span class="tag">普工</span><span class="tag">车间</span><span class="tag">操作工</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="163">
+          <td>长白班坐班/260一天/不体检/包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/214234913.html" target="_blank">深圳市元恒芯电子科技有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:42</td>
+          <td><span class="tag">普工</span><span class="tag">车间</span><span class="tag">操作工</span><span class="tag">长白班</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="164">
+          <td>沙井电子厂仓管/品管员6500+包吃包住</td>
+          <td><a href="https://m.yupao.com/qiye/37677771.html" target="_blank">广州市粤惠人力资源有限公司</a></td>
+          <td>宝安区 · 福永</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:40</td>
+          <td><span class="tag">电子厂</span><span class="tag">打印机</span><span class="tag">普工</span><span class="tag">车间</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="165">
+          <td>22纯工价/电子厂/7000-8000元/月</td>
+          <td><a href="https://m.yupao.com/qiye/195018584.html" target="_blank">光正人力资源（深圳）有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:39</td>
+          <td><span class="tag">电子厂</span><span class="tag">普工</span><span class="tag">操作工</span><span class="tag">长白班</span><span class="tag">免费培训</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="166">
+          <td>独立岗位 不穿工衣 上班可带手机 耳机</td>
+          <td><a href="https://m.yupao.com/qiye/169865862.html" target="_blank">深圳市鹏晖达电子科技有限公司</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:39</td>
+          <td><span class="tag">包装工</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">夜班补贴</span><span class="tag">保险</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="167">
+          <td>迷你风扇打包学生工坐班轻松自由带手机</td>
+          <td><a href="https://m.yupao.com/qiye/169865862.html" target="_blank">深圳市鹏晖达电子科技有限公司</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>6000-7000元/月</td>
+          <td data-sort-num="25.0">23.1-26.9 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:35</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="168">
+          <td>30/h蓝牙耳机包装厂 坐班 可带手机听歌 4人间宿舍</td>
+          <td><a href="https://m.yupao.com/qiye/196178279.html" target="_blank">深圳市美欧乐电子科技有限公司</a></td>
+          <td>龙华区 · 大浪</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 15:33</td>
+          <td><span class="tag">包装工</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">包住</span><span class="tag">工龄奖</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="169">
+          <td>荣耀新厂320/天妹子多可带手机随走随结不用体检</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 14:34</td>
+          <td><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">花园式厂</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="170">
+          <td>0元入职新能源月保底8500人走账清做事轻松好上手妹子多多</td>
+          <td><a href="https://m.yupao.com/qiye/182399946.html" target="_blank">奇创电子</a></td>
+          <td>龙华区 · 民治</td>
+          <td>月薪</td>
+          <td>8000-9000元/月</td>
+          <td data-sort-num="32.69230769230769">30.8-34.6 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 11:35</td>
+          <td><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">普工</span><span class="tag">花园式厂</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="171">
+          <td>小风扇厂打包组装长白班 包吃住</td>
+          <td><a href="https://m.yupao.com/qiye/215901989.html" target="_blank">深圳市硕豪劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>品管员</td>
+          <td>2026年07月05日 10:13</td>
+          <td><span class="tag">长白班</span><span class="tag">操作工</span><span class="tag">车间</span><span class="tag">风扇厂</span><span class="tag">普工</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="172">
+          <td>统计员</td>
+          <td><a href="http://m.yupao.com/qiye/218389987.html" target="_blank">深圳市圆创未来科技有限公司</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>6000-9000元/月</td>
+          <td data-sort-num="28.846153846153847">23.1-34.6 元/时</td>
+          <td>统计员</td>
+          <td></td>
+          <td><span class="tag">统计员</span><span class="tag">经验不限</span><span class="tag">学历不限</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="173">
+          <td>运营经理</td>
+          <td><a href="https://m.yupao.com/qiye/207472150.html" target="_blank">深圳汇杰恒嘉科技有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>统计员</td>
+          <td></td>
+          <td><span class="tag">生产总监</span><span class="tag">1-3年</span><span class="tag">中专/中技</span><span class="tag">有生产管理经验</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="174">
+          <td>商品统计员</td>
+          <td><a href="https://m.yupao.com/qiye/211533251.html" target="_blank">我说（深圳）服装供应链管理有限公司</a></td>
+          <td>龙华区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>统计员</td>
+          <td></td>
+          <td><span class="tag">商品专员</span><span class="tag">经验不限</span><span class="tag">大专</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="175">
+          <td>统计员</td>
+          <td><a href="https://m.yupao.com/qiye/46225973.html" target="_blank">深圳市万成混凝土有限公司</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>统计员</td>
+          <td></td>
+          <td><span class="tag">统计员</span><span class="tag">1-3年</span><span class="tag">学历不限</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="176">
+          <td>统计员</td>
+          <td><a href="https://m.yupao.com/qiye/209753703.html" target="_blank">深圳施维英工程机械设备有限公司</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>4000-7000元/月</td>
+          <td data-sort-num="21.153846153846153">15.4-26.9 元/时</td>
+          <td>统计员</td>
+          <td></td>
+          <td><span class="tag">统计员</span><span class="tag">1-3年</span><span class="tag">高中</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="177">
+          <td>福田寿司郎兼职纯工价23一小时</td>
+          <td><a href="https://m.yupao.com/qiye/7523952.html" target="_blank">深圳群光人力资源有限公司</a></td>
+          <td>福田区 · 岗厦</td>
+          <td>月薪</td>
+          <td>5000-6000元/月</td>
+          <td data-sort-num="21.153846153846153">19.2-23.1 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月05日 15:41</td>
+          <td><span class="tag">服务员</span><span class="tag">20人以上</span><span class="tag">月结</span><span class="tag">兼职</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="178">
+          <td>厨房帮工，切配打荷</td>
+          <td><a href="https://m.yupao.com/qiye/198763530.html" target="_blank">深圳市坪山区坑梓街道九亩地粤菜店(个体工商户)</a></td>
+          <td>坪山区 · 坑梓</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月05日 15:38</td>
+          <td><span class="tag">打荷</span><span class="tag">切配</span><span class="tag">包住</span><span class="tag">包吃</span><span class="tag">3-5人</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="179">
+          <td>厨房帮工</td>
+          <td><a href="https://m.yupao.com/qiye/216725410.html" target="_blank">圣多斯餐饮</a></td>
+          <td>龙华区</td>
+          <td>时薪</td>
+          <td>20-30元/时</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月05日 10:05</td>
+          <td><span class="tag">兼职</span><span class="tag">切配</span><span class="tag">配菜</span><span class="tag">打荷</span><span class="tag">包吃</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="180">
+          <td>厨房帮工，摊位帮忙切菜，打包</td>
+          <td><a href="https://m.yupao.com/qiye/192441824.html" target="_blank">深圳市宝安区沙井街道顺口溜凉菜店(个体工商户)</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>4000-6000元/月</td>
+          <td data-sort-num="19.23076923076923">15.4-23.1 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月05日 10:02</td>
+          <td><span class="tag">厨房帮工</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">做事勤快，反应能力强</span></td>
+        </tr>
+        <tr data-district="福田区" data-sort-idx="181">
+          <td>洗碗工 厨房杂工 月入8000以上 包吃包住 月结</td>
+          <td><a href="https://m.yupao.com/qiye/216216996.html" target="_blank">深圳市福田区御港家政服务服务中心（个体工商户）</a></td>
+          <td>福田区 · 保税区</td>
+          <td>月薪</td>
+          <td>6000-18000元/月</td>
+          <td data-sort-num="46.15384615384615">23.1-69.2 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月05日 09:52</td>
+          <td><span class="tag">洗碗工</span><span class="tag">3-5人</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="182">
+          <td>广东深圳找氩弧焊帮工小工1名，上螺丝，处理外观，打磨零散活，会用磨光机...</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>帮工</td>
+          <td>2026年07月05日 09:06</td>
+          <td><span class="tag">氩弧焊工</span><span class="tag">小工</span></td>
+        </tr>
+        <tr data-district="其他/未知" data-sort-idx="183">
+          <td>广东深圳临时帮工，清洗，腌制。20一小时。明天上午10点到10点，马上电话</td>
+          <td></td>
+          <td>其他/未知</td>
+          <td>时薪</td>
+          <td>20元/时</td>
+          <td data-sort-num="20.0">20.0 元/时</td>
+          <td>帮工</td>
+          <td>2026年07月04日 22:26</td>
+          <td><span class="tag">临时工</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="184">
+          <td>深圳罗湖区招工地小工/杂工，找一个师傅自带拖车，帮忙从三楼清理垃圾运到一...</td>
+          <td></td>
+          <td>罗湖区 · 东门</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:28</td>
+          <td><span class="tag">小工</span><span class="tag">1-4天</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="185">
+          <td>深圳宝安区招弱电/安防、工地小工/杂工、水电</td>
+          <td></td>
+          <td>宝安区 · 福永</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:26</td>
+          <td><span class="tag">水电工</span><span class="tag">小工</span><span class="tag">弱电工</span></td>
+        </tr>
+        <tr data-district="龙华区" data-sort-idx="186">
+          <td>深圳龙华区招工地小工/杂工，做过水电的联系</td>
+          <td><a href="https://m.yupao.com/qiye/6642660.html" target="_blank">润景丰创</a></td>
+          <td>龙华区 · 观澜</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:25</td>
+          <td><span class="tag">水电工</span><span class="tag">小工</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="南山区" data-sort-idx="187">
+          <td>深圳南山区招工地小工/杂工能长期做</td>
+          <td></td>
+          <td>南山区 · 南油</td>
+          <td>日薪</td>
+          <td>200-300元/天</td>
+          <td data-sort-num="25.0">20.0-30.0 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:25</td>
+          <td><span class="tag">小工</span><span class="tag">长期</span><span class="tag">1-2人</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="188">
+          <td>电工/吃住免费月入1.6W不体检可借支</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>坪山区</td>
+          <td>月薪</td>
+          <td>9000-12000元/月</td>
+          <td data-sort-num="40.38461538461539">34.6-46.2 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:24</td>
+          <td><span class="tag">装配电工</span><span class="tag">包吃</span><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="189">
+          <td>急招电工+长白班免费吃住公寓宿舍</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>8000-12000元/月</td>
+          <td data-sort-num="38.46153846153846">30.8-46.2 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:24</td>
+          <td><span class="tag">维修电工</span><span class="tag">包吃</span><span class="tag">五险一金</span><span class="tag">20人以上</span><span class="tag">月结</span></td>
+        </tr>
+        <tr data-district="坪山区" data-sort-idx="190">
+          <td>装配电工月入1.8W/面试不严/吃住都是免费的</td>
+          <td><a href="https://m.yupao.com/qiye/184706142.html" target="_blank">深圳捷诚劳务派遣有限公司</a></td>
+          <td>坪山区 · 坑梓</td>
+          <td>月薪</td>
+          <td>1-1.2万元/月</td>
+          <td data-sort-num="42.30769230769231">38.5-46.2 元/时</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:24</td>
+          <td><span class="tag">装配电工</span><span class="tag">包吃</span><span class="tag">五险一金</span><span class="tag">包住</span><span class="tag">20人以上</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="191">
+          <td>深圳龙岗区长期包月招工地小工/杂工,装木柴，拆卡板</td>
+          <td></td>
+          <td>龙岗区</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:18</td>
+          <td><span class="tag">小工</span><span class="tag">拆除</span></td>
+        </tr>
+        <tr data-district="罗湖区" data-sort-idx="192">
+          <td>深圳罗湖区招弱电/安防、工地力工、工地小工/杂工、工地学徒工</td>
+          <td></td>
+          <td>罗湖区</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>小工</td>
+          <td>2026年07月05日 20:17</td>
+          <td><span class="tag">小工</span><span class="tag">力工</span><span class="tag">弱电工</span><span class="tag">工地学徒工</span></td>
+        </tr>
+        <tr data-district="龙岗区" data-sort-idx="193">
+          <td>切割工</td>
+          <td><a href="https://m.yupao.com/qiye/206973344.html" target="_blank">深圳市顺昌五金板材有限公司</a></td>
+          <td>龙岗区</td>
+          <td>月薪</td>
+          <td>6000-8000元/月</td>
+          <td data-sort-num="26.923076923076923">23.1-30.8 元/时</td>
+          <td>切割工</td>
+          <td>2026年07月05日 12:16</td>
+          <td><span class="tag">切割工</span><span class="tag">1-2人</span><span class="tag">月结</span><span class="tag">全职</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="194">
+          <td>搬运/切割工</td>
+          <td><a href="https://m.yupao.com/qiye/217980795.html" target="_blank">亿航塑胶</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>7000-8000元/月</td>
+          <td data-sort-num="28.846153846153847">26.9-30.8 元/时</td>
+          <td>切割工</td>
+          <td>2026年07月05日 10:09</td>
+          <td><span class="tag">工厂搬运工</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">加班补贴</span><span class="tag">五险</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="195">
+          <td>机械制造切割工</td>
+          <td><a href="https://m.yupao.com/qiye/217606502.html" target="_blank">深圳市惠富鑫通信</a></td>
+          <td>宝安区</td>
+          <td>月薪</td>
+          <td>6000-12000元/月</td>
+          <td data-sort-num="34.61538461538461">23.1-46.2 元/时</td>
+          <td>切割工</td>
+          <td>2026年07月05日 10:03</td>
+          <td><span class="tag">切割工</span><span class="tag">包住</span><span class="tag">餐补</span><span class="tag">社保</span><span class="tag">6-10人</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="196">
+          <td>文职，切割工，仓库员，QC，品控，配送</td>
+          <td><a href="https://m.yupao.com/qiye/173505247.html" target="_blank">深圳壮雄科技有限公司</a></td>
+          <td>宝安区 · 松岗</td>
+          <td>未识别</td>
+          <td></td>
+          <td data-sort-num="-1">-</td>
+          <td>切割工</td>
+          <td></td>
+          <td><span class="tag">生产跟单</span></td>
+        </tr>
+        <tr data-district="宝安区" data-sort-idx="197">
+          <td>深圳宝安区大家好，我公司招线切割师傅，要求：1，两年以上线切割工作经验...</td>
+          <td><a href="https://m.yupao.com/qiye/205685804.html" target="_blank">深圳宝安区新桥睿丰五金经营部</a></td>
+          <td>宝安区 · 沙井</td>
+          <td>月薪</td>
+          <td>9000-13000元/月</td>
+          <td data-sort-num="42.30769230769231">34.6-50.0 元/时</td>
+          <td>切割工</td>
+          <td>2026年07月01日 13:27</td>
+          <td><span class="tag">切割工</span><span class="tag">社保</span><span class="tag">月结</span></td>
+        </tr></tbody>
+            </table>
+          </div>
+        </div>
+  </div>
+  <div class="footer">
+    数据来源: 鱼泡网 m.yupao.com · 换算规则: 日薪÷10、月薪÷260 · 生成时间: 2026/07/07 14:29:01
+  </div>
+<script>
+  // 标签切换（多城市时存在）
+  (function() {
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    if (!tabBtns.length) return;
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        tabBtns.forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.city-panel').forEach(function(p) { p.style.display = 'none'; });
+        btn.classList.add('active');
+        var panel = document.getElementById('panel-' + btn.dataset.tab);
+        if (panel) panel.style.display = '';
+      });
+    });
+  })();
+
+  // 每个岗位明细表：列头排序 + 行政区筛选
+  (function() {
+    document.querySelectorAll('.jobs-table').forEach(function(table) {
+      var idx = table.dataset.idx;
+      var filter = document.getElementById('districtFilter-' + idx);
+      var countEl = document.getElementById('filterCount-' + idx);
+      var tbody = table.querySelector('tbody');
+      var allRows = Array.from(tbody.querySelectorAll('tr'));
+
+      if (filter) {
+        filter.addEventListener('change', function() {
+          var v = filter.value;
+          var shown = 0;
+          allRows.forEach(function(r) {
+            var show = v === '全部' || r.dataset.district === v;
+            r.style.display = show ? '' : 'none';
+            if (show) shown++;
+          });
+          if (countEl) countEl.textContent = '共 ' + shown + ' 条';
+        });
+      }
+
+      table.querySelectorAll('th').forEach(function(th) {
+        th.addEventListener('click', function() {
+          var c = parseInt(th.dataset.col), t = th.dataset.type;
+          var sD = th.dataset.dir === 'asc' ? -1 : 1;
+          table.querySelectorAll('th').forEach(function(h) { h.classList.remove('sort-asc','sort-desc'); h.dataset.dir = ''; });
+          th.dataset.dir = (sD === 1) ? 'asc' : 'desc';
+          th.classList.add(sD === 1 ? 'sort-asc' : 'sort-desc');
+          var rows = allRows.filter(function(r) { return r.style.display !== 'none'; });
+          rows.sort(function(a, b) {
+            var ca = a.children[c], cb = b.children[c], va, vb;
+            if (t === 'num') { va = parseFloat(ca.dataset.sortNum) || -1; vb = parseFloat(cb.dataset.sortNum) || -1; }
+            else { va = ca.textContent.trim(); vb = cb.textContent.trim(); }
+            if (va < vb) return -1 * sD;
+            if (va > vb) return 1 * sD;
+            return 0;
+          });
+          rows.forEach(function(r) { tbody.appendChild(r); });
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
